@@ -62,11 +62,13 @@ export function Projects() {
 
           <div className="flex gap-12 mt-12 flex-wrap justify-center">
             {filteredProjects().map((item) => (
-              <Card key={item.id} imgSrc={item.img} title={item.title} />
+              <Card key={item.id} imgSrc={item.img} title={item.title} url={item.url} url_github={item.url_github}/>
             ))}
           </div>
         </div>
       </div>
+
+      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-divider" />
     </div>
   );
 }
