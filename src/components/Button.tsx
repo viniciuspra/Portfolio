@@ -21,7 +21,7 @@ export function Button({ children, secondary, icon, onClick }: ButtonProps) {
           <p className="[text-shadow:_0_1px_1px_rgb(0_0_0_/_50%)]">
             {children}
           </p>
-          <Image src={icon} alt="icon" />
+          <Image src={icon} alt="icon" width={24} height={24}/>
         </div>
       ) : (
         <p className="[text-shadow:_0_1px_1px_rgb(0_0_0_/_50%)]">{children}</p>

@@ -67,6 +67,9 @@ export function About() {
             src={aboutPageIllustration}
             alt="illustration image"
             className="max-w-full sm:max-w-[401px]"
+            width={1000}
+            height={1000}
+            layout="responsive"
           />
         </div>
       </div>
