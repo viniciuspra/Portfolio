@@ -54,12 +54,16 @@ export function About() {
           </p>
 
           <div className="flex items-center justify-center xl:justify-start gap-6 mt-4">
-            <a href="https://github.com/Viniciuspra" target="_blank">
-              <SocialMediaIcon title="Github" imgSrc={githubIcon} />
-            </a>
-            <a href="https://www.linkedin.com/in/vinicius-cascaes-pra" target="_blank">
-              <SocialMediaIcon title="Linkedin" imgSrc={linkedinIcon} />
-            </a>
+            <SocialMediaIcon
+              title="Github"
+              imgSrc={githubIcon}
+              href="https://github.com/Viniciuspra"
+            />
+            <SocialMediaIcon
+              title="Linkedin"
+              imgSrc={linkedinIcon}
+              href="https://www.linkedin.com/in/vinicius-cascaes-pra"
+            />
           </div>
         </div>
 

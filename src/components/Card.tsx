@@ -22,14 +22,10 @@ export function Card({ imgSrc, title, url, url_github }: CardProps) {
         height={1000}
         className="transition-all duration-700 backdrop-blur-0 group-hover:scale-105 ease-in-out "
       />
-      <p className="z-20 flex absolute w-full items-center justify-center gap-12 -top-1/2 group-hover:top-1/3 xl:group-hover:top-20 transition-all duration-300">
-        <a href={url_github} target="_blank">
-          <SocialMediaIcon title="Github" imgSrc={githubIcon2} />
-        </a>
-        <a href={url} target="_blank">
-          <SocialMediaIcon title="site" imgSrc={webLink} />
-        </a>
-      </p>
+      <div className="z-20 flex absolute w-full items-center justify-center gap-12 -top-1/2 group-hover:top-1/3 xl:group-hover:top-20 transition-all duration-300">
+        <SocialMediaIcon title="Github" imgSrc={githubIcon2} href={url_github}/>
+        <SocialMediaIcon title="site" imgSrc={webLink} href={url}/>
+      </div>
       <div className="z-10 absolute top-0 left-0 w-full h-full group-hover:backdrop-blur-sm" />
     </div>
   );
