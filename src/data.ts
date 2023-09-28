@@ -60,7 +60,7 @@ export const projects: Project[] = [
     category: "Frontend",
     img: portfolio.src,
     title: "Portfolio - Vinicius Pra",
-    url: "https://github.com/viniciuspra/Portfolio",
+    url: "https://portfolio-py1ccyccm-viniciuspra.vercel.app",
     url_github: "https://github.com/viniciuspra/Portfolio",
   },
 ];
