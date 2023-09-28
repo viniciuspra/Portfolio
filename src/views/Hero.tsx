@@ -24,15 +24,10 @@ export function Hero() {
             Hello i&apos;am
             <br />
             <span className="text-secondary max-w-screen-xl md:max-w-lg lg:max-w-xl xl:max-w-4xl overflow-hidden inline-block">
-              <Typewriter
-                words={["Vinicus Pra", "Web Developer", "Full-Stack"]}
-                loop
-                cursor
-                cursorStyle="_"
-              />
+              <Typewriter words={["Vinicius Pra", "Web Developer", "Full-Stack"]} cursor cursorStyle="|" typeSpeed={150} deleteSpeed={100} loop/>
             </span>
           </h1>
-          <p className="text-textPrimary text-center text-sm xl:max-w-2xl xl:text-start md:text-lg leading-relaxed mt-6 font-medium justify-center">
+          <p className="text-textPrimary text-center text-sm xl:max-w-2xl xl:text-start md:text-lg xl:text-xl leading-relaxed mt-6 font-medium justify-center">
             <span className="text-secondary">Desenvolvedor web full stack</span>
             , apaixonado por criar aplicações modernas. Sempre em busca de novos{" "}
             <span className="text-secondary">desafios</span> e{" "}
@@ -49,10 +44,12 @@ export function Hero() {
           src={homePageIllustration}
           alt="illustration image"
           className="max-w-full sm:max-w-[401px]"
+          width={1000}
+          height={1000}
         />
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-divider"/>
+      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-divider" />
     </div>
   );
 }

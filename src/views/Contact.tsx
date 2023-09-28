@@ -4,6 +4,7 @@ import ContactPageIllustration from "@/assets/contact-illustration.svg";
 export function Contact() {
   return (
     <div
+      id="contact"
       className="flex min-h-screen relative items-center justify-center"
       style={{
         backgroundImage: `url(${ContactPageImg.src})`,

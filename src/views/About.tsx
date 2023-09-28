@@ -11,6 +11,7 @@ import githubIcon from "@/assets/github-icon.svg";
 export function About() {
   return (
     <div
+      id="about"
       className="min-h-screen flex items-center justify-center relative"
       style={{
         backgroundImage: `url(${aboutPageImg.src})`,
@@ -69,7 +70,6 @@ export function About() {
             className="max-w-full sm:max-w-[401px]"
             width={1000}
             height={1000}
-            layout="responsive"
           />
         </div>
       </div>

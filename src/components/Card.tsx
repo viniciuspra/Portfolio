@@ -13,7 +13,6 @@ export function Card({ imgSrc, title }: CardProps) {
         alt={title}
         width={1000}
         height={1000}
-        layout="responsive"
         className="transition-all rounded-lg duration-500 backdrop-blur-0 group-hover:scale-105 ease-in-out max-h-[220px]"
       />
 
