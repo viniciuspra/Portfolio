@@ -25,6 +25,7 @@ export function Projects() {
 
   return (
     <div
+      id="projects"
       className="min-h-screen relative"
       style={{
         backgroundImage: `url(${projectPageImg.src})`,

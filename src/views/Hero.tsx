@@ -10,6 +10,7 @@ import downloadIcon from "@/assets/download-btn-icon.svg";
 export function Hero() {
   return (
     <div
+      id="home"
       className="flex min-h-screen relative items-center justify-center"
       style={{
         backgroundImage: `url(${homePageImg.src})`,

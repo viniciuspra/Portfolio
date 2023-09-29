@@ -1,3 +1,4 @@
+import { Menu } from "@/components/Menu";
 import { About, Contact, Hero, Projects } from "@/views";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
       <About />
       <Projects />
       <Contact />
+      <Menu />
     </>
   );
 }
