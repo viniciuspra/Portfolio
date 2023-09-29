@@ -1,5 +1,6 @@
-import { Tooltip } from "@mui/material";
 import Image from "next/image";
+
+import { Tooltip } from "@mui/material";
 
 interface SocialMediaIconProps {
   imgSrc: string;

@@ -1,4 +1,5 @@
-import { Menu } from "@/components/Menu";
+"use client";
+import { Menu } from "@/components";
 import { About, Contact, Hero, Projects } from "@/views";
 
 export default function Home() {

@@ -1,5 +1,36 @@
-export const fadeIn = () => {};
+export const fadeIn = (direction: "up" | "down") => {
+  return {
+    hidden: {
+      opacity: 0,
+      y: direction === "down" ? -100 : 100,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+    },
+  };
+};
 
-export const reveal = () => {};
+export const reveal = () => {
+  return {
+    hidden: {
+      left: 0,
+    },
+    visible: {
+      left: "100%",
+    },
+  };
+};
 
-export const scale = () => {};
+export const scale = () => {
+  return {
+    hidden: {
+      scale: 0,
+      opacity: 0,
+    },
+    visible: {
+      scale: 1,
+      opacity: 1,
+    },
+  };
+};
