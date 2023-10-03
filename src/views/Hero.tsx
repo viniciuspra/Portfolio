@@ -70,13 +70,12 @@ export function Hero() {
             viewport={{ once: false }}
             className="my-12 flex flex-col sm:flex-row items-center gap-6 justify-center xl:justify-start"
           >
-            <Button secondary>Hire Me</Button>
             <a
               className="w-full sm:w-fit"
               href="/Curriculum-ViniciusPra.pdf"
               download
             >
-              <Button icon={downloadIcon}>Download cv</Button>
+              <Button icon={downloadIcon} secondary>Download cv</Button>
             </a>
           </motion.div>
         </div>
