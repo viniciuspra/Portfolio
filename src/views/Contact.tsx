@@ -3,12 +3,11 @@ import Image from "next/image";
 import ContactPageImg from "@/assets/contact-page.svg";
 import ContactPageIllustration from "@/assets/contact-illustration.svg";
 
-import { Button, InputLabel, Reveal } from "@/components";
-
 import { motion } from "framer-motion";
 
-import { fadeIn, scale } from "@/utils/variants";
+import { scale } from "@/utils/variants";
 import { transition } from "@/utils/transition";
+import { ContactForm, Reveal } from "@/components";
 
 export function Contact() {
   return (
@@ -47,29 +46,7 @@ export function Contact() {
           </motion.div>
         </div>
 
-        <motion.div
-          variants={fadeIn("up")}
-          transition={transition()}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false }}
-          className="flex-1 flex flex-col gap-6 w-full max-w-[696px]"
-        >
-          <div className="flex flex-col sm:flex-row items-center gap-6">
-            <InputLabel labelText="Seu Nome" placeholderText="Nome" />
-            <InputLabel labelText="Seu E-mail" placeholderText="E-mail" />
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center gap-6">
-            <InputLabel
-              labelText="Sua Mensagem"
-              placeholderText="Mensagem"
-              textarea
-            />
-          </div>
-
-          <Button secondary>Enviar Mensagem</Button>
-        </motion.div>
+        <ContactForm />  
       </div>
 
       <div className="absolute bottom-0 left-0 w-full h-[1px] bg-divider" />
