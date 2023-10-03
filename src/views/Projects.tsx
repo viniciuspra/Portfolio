@@ -41,7 +41,7 @@ export function Projects() {
       }}
     >
       <div className="max-w-screen-2xl w-full py-16 px-12 mx-auto">
-        <div className="flex-1 flex flex-col gap-4">
+        <div className="flex-1 flex flex-col gap-6">
           <Reveal>
             <h2 className="text-textPrimary text-center xl:text-start text-4xl sm:text-5xl lg:text-6xl font-bold">
               <span className="text-secondary ">Meus</span> Projetos
