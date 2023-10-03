@@ -6,16 +6,20 @@ interface ButtonProps {
   children: ReactNode;
   secondary?: boolean;
   icon?: string;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
   onClick?: () => void;
 }
 
-export function Button({ children, secondary, icon, onClick }: ButtonProps) {
+export function Button({ children, secondary, icon, onClick, type, disabled }: ButtonProps) {
   return (
     <button
       onClick={onClick}
       className={`${secondary ? "bg-secondary" : "bg-accent"} ${
         secondary ? "hover:bg-hoverSecondary" : "hover:bg-hoverPrimary"
       } transition-all ease-linear duration-200 py-2.5 px-8 rounded-full text-textPrimary text-base sm:text-lg font-bold relative w-full sm:w-fit`}
+      type={type}
+      disabled={disabled} 
     >
       {icon ? (
         <div className="flex items-center gap-2.5 justify-center">
