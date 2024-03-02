@@ -57,6 +57,14 @@ export const projects: Project[] = [
   },
   {
     id: 5,
+    category: "FullStack",
+    img: rocketnotes,
+    title: "Rocketnotes",
+    url: "https://rocketnotespro.netlify.app",
+    url_github: "https://github.com/viniciuspra/RocketNotes",
+  },
+  {
+    id: 6,
     category: "Frontend",
     img: portfolio.src,
     title: "Portfolio - Vinicius Pra",
