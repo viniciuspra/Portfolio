@@ -3,7 +3,7 @@ import filmFanatic from "@/assets/filmfanatic-project.png";
 import facilitaAi from "@/assets/facilita-ai-project.png";
 import rocketpay from "@/assets/rocketpay-project.png";
 import rocketnotes from "@/assets/rocketnotes-project.png";
-import portfolio from "@/assets/portfolio-project.png";
+import chirpify from "@/assets/Chirpify.png";
 
 interface Project {
   id: number;
@@ -58,17 +58,9 @@ export const projects: Project[] = [
   {
     id: 5,
     category: "FullStack",
-    img: rocketnotes,
-    title: "Rocketnotes",
-    url: "https://rocketnotespro.netlify.app",
-    url_github: "https://github.com/viniciuspra/RocketNotes",
-  },
-  {
-    id: 6,
-    category: "Frontend",
-    img: portfolio.src,
-    title: "Portfolio - Vinicius Pra",
-    url: "https://portfolio-py1ccyccm-viniciuspra.vercel.app",
-    url_github: "https://github.com/viniciuspra/Portfolio",
+    img: chirpify.src,
+    title: "Chirpify",
+    url: "https://chirpify.netlify.app/",
+    url_github: "https://github.com/viniciuspra/Chirpify-chat-client",
   },
 ];
