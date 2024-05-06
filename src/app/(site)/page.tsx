@@ -1,10 +1,9 @@
-import { ModeToggle } from "@/components/mode-toggle";
+import React from "react";
 
 export default async function Home() {
   return (
-    <div className="w-full h-full container">
+    <div>
       <h1>Hello</h1>
-      <ModeToggle />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
+import Sidebar from "@/components/side-bar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br">
+    <html lang="pt-br" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
@@ -26,7 +27,10 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="max-w-7xl mx-auto h-full px-10">{children}</main>
+          <div className="flex min-h-screen md:ml-52 lg:ml-64">
+            <Sidebar />
+            <main className="flex-1">{children}</main>
+          </div>
         </ThemeProvider>
       </body>
     </html>
