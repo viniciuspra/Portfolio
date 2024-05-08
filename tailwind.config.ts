@@ -63,6 +63,16 @@ const config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      keyframes: {
+        "rbg-effect": {
+          '50%': { 
+            filter: "hue-rotate(360deg)"
+          }
+        }
+      },
+      animation: {
+        "rbg-effect": "rbg-effect 2.5s linear infinite",
+      },
     },
   },
   plugins: [],

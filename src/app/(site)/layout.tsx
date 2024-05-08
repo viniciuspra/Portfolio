@@ -3,14 +3,16 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
-import Sidebar from "@/components/side-bar";
+import { ModeToggle } from "@/components/mode-toggle";
+import { Sidebar } from "@/components/side-bar";
+import { SmoothScroll } from "@/components/smooth-scroll";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Portfólio | Vinicius Cascaes",
+  title: "Portfolio | Vinicius Pra",
   description:
-    "Confira o portfólio de Vinicius Cascaes, um desenvolvedor FullStack especializado em JavaScript e TypeScript. Veja seus projetos, habilidades e entre em contato para oportunidades profissionais.",
+    "Confira o portfolio de Vinicius Cascaes, um desenvolvedor FullStack especializado em JavaScript e TypeScript. Veja seus projetos, habilidades e entre em contato para oportunidades profissionais.",
 };
 
 export default async function RootLayout({
@@ -27,9 +29,12 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen md:ml-52 lg:ml-64">
+          <div className="relative flex min-h-screen overflow-x-hidden lg:ml-64">
+            <ModeToggle />
             <Sidebar />
-            <main className="flex-1">{children}</main>
+            <main>
+              <SmoothScroll>{children}</SmoothScroll>
+            </main>
           </div>
         </ThemeProvider>
       </body>

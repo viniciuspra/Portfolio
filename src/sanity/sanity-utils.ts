@@ -1,7 +1,9 @@
 import { createClient, groq } from "next-sanity";
 import clientConfig from "@/sanity/config/client-config";
+
 import { Project } from "@/types/project";
 import { Page } from "@/types/page";
+import { Home } from "@/types/home";
 
 async function getProjects(): Promise<Project[]> {
   return createClient(clientConfig).fetch(
@@ -14,7 +16,7 @@ async function getProjects(): Promise<Project[]> {
       github, 
       "image": image.asset->url,
       _createdAt
-    }`
+    }`,
   );
 }
 
@@ -30,7 +32,7 @@ async function getProject(slug: string): Promise<Project> {
       "image": image.asset->url,
       _createdAt
     }`,
-    { slug }
+    { slug },
   );
 }
 
@@ -41,7 +43,7 @@ async function getPages(): Promise<Page[]> {
       title,
       "slug": slug.current,
       _createdAt
-    }`
+    }`,
   );
 }
 
@@ -54,8 +56,27 @@ async function getPage(slug: string): Promise<Page> {
       content,
       _createdAt
     }`,
-    { slug }
+    { slug },
   );
 }
 
-export { getProjects, getProject, getPages, getPage };
+async function getHomeData(): Promise<Home> {
+  return createClient(clientConfig).fetch(
+    groq`*[_type == "homePage"]{
+      _id,
+      title,
+      position,
+      specialization,
+      slogan,
+      "services": services[]{
+        _key,
+        title,
+        description,
+        "image": image.asset->url
+      },
+      _createdAt
+    }`,
+  );
+}
+
+export { getProjects, getProject, getPages, getPage, getHomeData };

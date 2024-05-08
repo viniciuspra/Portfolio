@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formspree/react": "^2.5.1",
     "@sanity/client": "^6.17.2",
     "framer-motion": "^11.1.8",
     "lucide-react": "^0.378.0",
@@ -17,6 +18,7 @@
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
+    "resize-observer-polyfill": "^1.5.1",
     "sanity": "^3.40.0",
     "tailwind-merge": "^2.3.0"
   },
