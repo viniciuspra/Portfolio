@@ -1,4 +1,4 @@
-import { PortableTextBlock } from "next-sanity";
+import { PortableTextBlock } from "sanity";
 
 type Page = {
   _id: string;

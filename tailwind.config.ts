@@ -60,18 +60,43 @@ const config = {
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-shadow": "var(--gradient-shadow)",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      backgroundSize: {
+        "400": "400%",
+      },
       keyframes: {
         "rbg-effect": {
-          '50%': { 
-            filter: "hue-rotate(360deg)"
-          }
-        }
+          "50%": {
+            filter: "hue-rotate(360deg)",
+          },
+        },
+        "border-effect": {
+          "0%": {
+            transform: "rotate(55deg)",
+          },
+          "100%": {
+            transform: "rotate(415deg)",
+          },
+        },
+        "shadow-rgb": {
+          "0%": {
+            "background-position": "0 0",
+          },
+          "50%": {
+            "background-position": "300% 0",
+          },
+          "100%": {
+            "background-position": "0 0",
+          },
+        },
       },
       animation: {
         "rbg-effect": "rbg-effect 2.5s linear infinite",
+        "shadow-rgb": "shadow-rgb 20s linear infinite",
+        "border-effect": "border-effect 2s linear infinite",
       },
     },
   },

@@ -14,12 +14,13 @@ export function ModeToggle() {
   };
 
   return (
-    <div className="group fixed right-2 top-2 z-50">
+    <div className="fixed right-3 top-3 z-50">
       <Button
         id="dropdownDefaultButton"
         onClick={toggleDropdown}
+        variant="outline"
         type="button"
-        className="h-9 w-9 border border-input bg-transparent p-0 shadow-sm hover:bg-accent hover:text-accent-foreground focus-visible:ring-1 focus-visible:ring-blue-500 group-focus-visible:border-blue-500 group-focus-visible:ring-blue-500"
+        className="h-9 w-9 p-0 shadow-sm group-focus-visible:border-blue-500 group-focus-visible:ring-1"
       >
         <Sun className="h-[1rem] w-[1rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 md:h-[1.2rem] md:w-[1.2rem]" />
         <Moon className="absolute h-[1rem] w-[1rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 md:h-[1.2rem] md:w-[1.2rem]" />
@@ -42,7 +43,8 @@ export function ModeToggle() {
                   setTheme("light");
                   toggleDropdown();
                 }}
-                className="flex w-full justify-start pl-2 pr-10"
+                variant="outline"
+                className="flex w-full justify-start border-none pl-2 pr-10"
               >
                 Light
               </Button>
@@ -53,7 +55,8 @@ export function ModeToggle() {
                   setTheme("dark");
                   toggleDropdown();
                 }}
-                className="flex w-full justify-start pl-2 pr-10"
+                variant="outline"
+                className="flex w-full justify-start border-none pl-2 pr-10"
               >
                 Dark
               </Button>
@@ -64,7 +67,8 @@ export function ModeToggle() {
                   setTheme("system");
                   toggleDropdown();
                 }}
-                className="flex w-full justify-start pl-2 pr-10"
+                variant="outline"
+                className="flex w-full justify-start border-none pl-2 pr-10"
               >
                 System
               </Button>

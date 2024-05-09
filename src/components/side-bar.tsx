@@ -6,7 +6,6 @@ import {
   Github,
   Layers,
   Linkedin,
-  Menu,
   Package,
   Phone,
   Puzzle,
@@ -23,13 +22,16 @@ export function Sidebar() {
   const sideBarIconStyle =
     "inline-flex items-center justify-center rounded-lg border p-1 group-hover:bg-blue-500 group-hover:text-white";
   const sideBarLinkStyle =
-    "group relative flex h-10 flex-row items-center gap-2 rounded-lg px-2 pr-6 transition-all hover:bg-accent focus:outline-none";
+    "group relative flex h-10 flex-row items-center gap-2 rounded-lg px-2 pr-6 transition-all hover:bg-accent group-focus:ring-2";
 
   return (
     <>
       <aside className="fixed left-0 top-0 z-50 h-full -translate-x-[100%] flex-col border-r transition-all duration-300 ease-out lg:w-64 lg:translate-x-0">
-        <Link href={"/"} className="flex h-28 items-center md:px-6 lg:px-8">
-          <div className="flex gap-3">
+        <Link
+          href={"/"}
+          className="group flex h-28 items-center focus:outline-none md:px-6 lg:px-8"
+        >
+          <div className="flex gap-3 group-focus:ring-2 group-focus:ring-foreground">
             <RocketSvgAnimated />
             <h1 className="text-xl font-bold uppercase">
               {" "}
@@ -41,8 +43,8 @@ export function Sidebar() {
           </div>
         </Link>
         <div className="flex-grow overflow-y-auto overflow-x-hidden">
-          <ul className="flex flex-col space-y-2 md:px-4 lg:px-6">
-            <li>
+          <ul className="flex flex-col space-y-2 py-3 md:px-4 lg:px-6">
+            <li className="group">
               <Link href="/" className={sideBarLinkStyle}>
                 <span
                   className={`${pathname === "/" ? "bg-blue-500 text-white" : "text-foreground/80 dark:text-muted-foreground/80"} ${sideBarIconStyle} `}
@@ -56,7 +58,7 @@ export function Sidebar() {
                 </span>
               </Link>
             </li>
-            <li>
+            <li className="group">
               <Link href="/services" className={sideBarLinkStyle}>
                 <span
                   className={`${pathname === "/services" ? "bg-blue-500 text-white" : "text-foreground/80 dark:text-muted-foreground/80"} ${sideBarIconStyle} `}
@@ -70,21 +72,21 @@ export function Sidebar() {
                 </span>
               </Link>
             </li>
-            <li>
+            <li className="group">
               <Link href="/projects" className={sideBarLinkStyle}>
                 <span
-                  className={`${pathname === "/projects" ? "bg-blue-500 text-white" : "text-foreground/80 dark:text-muted-foreground/80"} ${sideBarIconStyle} `}
+                  className={`${pathname.includes("/projects") ? "bg-blue-500 text-white" : "text-foreground/80 dark:text-muted-foreground/80"} ${sideBarIconStyle} `}
                 >
                   <Puzzle size={16} />
                 </span>
                 <span
-                  className={`${pathname === "/projects" ? "text-foreground dark:text-white" : "text-muted-foreground/90 dark:text-muted-foreground/80"} ${sideBarItemStyle}`}
+                  className={`${pathname.includes("/projects") ? "text-foreground dark:text-white" : "text-muted-foreground/90 dark:text-muted-foreground/80"} ${sideBarItemStyle}`}
                 >
                   Projects
                 </span>
               </Link>
             </li>
-            <li>
+            <li className="group">
               <Link href="/contact" className={sideBarLinkStyle}>
                 <span
                   className={`${pathname === "/contact" ? "bg-blue-500 text-white" : "text-foreground/80 dark:text-muted-foreground/80"} ${sideBarIconStyle} `}
@@ -105,7 +107,7 @@ export function Sidebar() {
                 </div>
               </div>
             </li>
-            <li>
+            <li className="group">
               <Link href="/favorites" className={sideBarLinkStyle}>
                 <span
                   className={`${pathname === "/favorites" ? "bg-blue-500 text-white" : "text-foreground/80 dark:text-muted-foreground/80"} ${sideBarIconStyle} `}
@@ -119,7 +121,7 @@ export function Sidebar() {
                 </span>
               </Link>
             </li>
-            <li>
+            <li className="group">
               <Link href="/stack" className={sideBarLinkStyle}>
                 <span
                   className={`${pathname === "/stack" ? "bg-blue-500 text-white" : "text-foreground/80 dark:text-muted-foreground/80"} ${sideBarIconStyle} `}
@@ -139,7 +141,7 @@ export function Sidebar() {
                 <div className="text-sm font-light tracking-wide">Socials</div>
               </div>
             </li>
-            <li>
+            <li className="group">
               <Link
                 href="https://www.linkedin.com/in/vinicius-cascaes-pra/"
                 target="_blank"
@@ -151,7 +153,7 @@ export function Sidebar() {
                 <span className={sideBarItemStyle}>LinkedIn</span>
               </Link>
             </li>
-            <li>
+            <li className="group">
               <Link
                 href="https://github.com/Viniciuspra"
                 target="_blank"
@@ -163,7 +165,7 @@ export function Sidebar() {
                 <span className={sideBarItemStyle}>GitHub</span>
               </Link>
             </li>
-            <li>
+            <li className="group">
               <Link
                 href="/Currículo-Vinicius-Cascaes-Prá.pdf"
                 target="_blank"

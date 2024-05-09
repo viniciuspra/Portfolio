@@ -1,8 +1,9 @@
-import { PortableTextBlock } from "next-sanity";
+import { PortableTextBlock } from "sanity";
 
 type Project = {
   _id: string;
   name: string;
+  subtitle: string;
   url: string;
   github: string;
   slug: string;

@@ -29,7 +29,7 @@ export function ExpertiseSection({ services, slogan }: Props) {
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.3, ease: "easeIn" }}
-          className="px-20 text-center text-lg font-extrabold leading-tight opacity-90 md:px-0 md:text-xl lg:text-2xl xl:text-3xl"
+          className="track px-20 text-center text-lg font-extrabold leading-tight -tracking-wide opacity-90 md:px-0 md:text-xl lg:text-2xl xl:text-3xl"
         >
           {slogan}
         </motion.h2>

@@ -32,9 +32,11 @@ export default async function RootLayout({
           <div className="relative flex min-h-screen overflow-x-hidden lg:ml-64">
             <ModeToggle />
             <Sidebar />
-            <main>
-              <SmoothScroll>{children}</SmoothScroll>
-            </main>
+            <SmoothScroll>
+              <main className="flex h-full flex-col items-center py-20 lg:ml-64">
+                {children}
+              </main>
+            </SmoothScroll>
           </div>
         </ThemeProvider>
       </body>
