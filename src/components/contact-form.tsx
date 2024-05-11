@@ -1,37 +1,27 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm, ValidationError } from "@formspree/react";
-import { Modal } from "./modal";
-import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import { Rocket } from "lucide-react";
+import { RocketSvgAnimated } from "./rocket-svg-animated";
 
 export function ContactForm() {
   const [state, handleSubmit] = useForm("xwkgydle");
-  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     if (state.succeeded) {
-      setShowToast(true);
+      toast("Thank you for getting in touch! Excited to connect with you.", {
+        icon: <RocketSvgAnimated />,
+        className: "dark:bg-card dark:text-white/90",
+      });
     }
   }, [state.succeeded]);
 
   return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, translateY: 100 },
-        visible: {
-          opacity: 1,
-          translateY: 0,
-          transition: { ease: "linear" },
-        },
-      }}
-      className="flex w-[800px] flex-col pt-14"
-    >
-      <h1 className="w-full pb-5 text-center text-4xl font-bold text-slate-950/80 dark:text-primary/95">
-        Tell me about your next project
-      </h1>
+    <>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-1 flex-col justify-center space-y-7"
+        className="relative mx-auto flex w-full flex-1 flex-col justify-center space-y-7 pb-10 pt-10 transition-all ease-linear"
       >
         <div className="flex gap-4">
           <label htmlFor="name" className="flex w-full flex-col gap-2">
@@ -81,7 +71,6 @@ export function ContactForm() {
           Submit
         </button>
       </form>
-      <Modal show={showToast && showToast} />
-    </motion.div>
+    </>
   );
 }
