@@ -36,7 +36,7 @@ export default async function RootLayout({
             <ModeToggle />
             <Sidebar />
             <SmoothScroll>
-              <main className="flex h-full translate-y-20 flex-col items-center py-20 transition-all lg:ml-64 lg:translate-y-0">
+              <main className="flex h-full pt-40 lg:pt-20 flex-col items-center pb-20 transition-all lg:ml-64 lg:translate-y-0">
                 {children}
                 <ToastContainer />
               </main>
