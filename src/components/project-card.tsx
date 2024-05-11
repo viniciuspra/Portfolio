@@ -1,10 +1,10 @@
 "use client";
 import { useRef, useEffect } from "react";
-import { useInView, useAnimation } from "framer-motion";
+import { useInView, useAnimation, motion, animate } from "framer-motion";
 import { Project } from "@/types/project";
 
-import Image from "next/image";
 import { PortableText } from "next-sanity";
+import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
@@ -24,13 +24,47 @@ export function ProjectCard({ projects }: Props) {
   }, [isInView]);
 
   return (
-    <div
-      className="w-full space-y-5 py-10 sm:px-10 lg:px-0"
-      suppressHydrationWarning
+    <motion.div
+      variants={{
+        hidden: { opacity: 0 },
+        visible: {
+          opacity: 1,
+          transition: {
+            staggerChildren: 0.25,
+            delay: 0.3,
+            delayChildren: 0.4,
+            ease: "linear",
+          },
+        },
+      }}
+      initial="hidden"
+      animate={mainControls}
+      ref={containerRef}
+      className="h-full w-full space-y-5  py-10 sm:px-10 lg:px-0"
     >
       {projects.map((project) => (
-        <Link href={`/projects/${project.slug}`} key={project._id}>
-          <div className="group flex w-full flex-col items-center gap-5 rounded-xl border p-4 transition-all duration-500 md:items-start md:border-transparent md:hover:border-foreground lg:flex-row lg:p-2">
+        <motion.div
+          key={project._id}
+          variants={{
+            hidden: {
+              opacity: 0,
+              translateX: "100%",
+              radius: "12px",
+            },
+            visible: {
+              opacity: 1,
+              translateX: 0,
+              transition: {
+                ease: "easeIn",
+                duration: 0.5,
+              },
+            },
+          }}
+        >
+          <Link
+            href={`/projects/${project.slug}`}
+            className="group flex w-full flex-col items-center gap-5 rounded-xl border p-4 transition-all duration-500 md:items-start md:border-transparent md:hover:border-foreground lg:flex-row lg:p-2"
+          >
             <div className="lg:w-1/3 lg:min-w-40 lg:px-0">
               <Image
                 src={project.image}
@@ -46,9 +80,9 @@ export function ProjectCard({ projects }: Props) {
                 <PortableText value={project.content} />
               </div>
             </div>
-          </div>
-        </Link>
+          </Link>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }
