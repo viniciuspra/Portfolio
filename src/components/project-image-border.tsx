@@ -7,7 +7,7 @@ interface Props {
 
 export function ProjectImageBorder({ image, name }: Props) {
   return (
-    <div className="md:hover:before:animate-border-effect relative grid cursor-pointer place-items-center overflow-hidden rounded-lg bg-background p-1 transition-all before:absolute before:h-[210%] before:w-1/3 before:rotate-[55deg] before:rounded-lg before:bg-primary after:absolute after:inset-1">
+    <div className="relative grid cursor-pointer place-items-center overflow-hidden rounded-lg bg-background p-1 transition-all before:absolute before:h-[210%] before:w-1/3 before:rotate-[55deg] before:rounded-lg before:bg-slate-800 after:absolute after:inset-1 dark:before:bg-primary md:hover:before:animate-border-effect">
       <Image
         src={image}
         width={1366}
