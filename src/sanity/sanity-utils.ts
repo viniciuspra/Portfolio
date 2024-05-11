@@ -4,6 +4,7 @@ import clientConfig from "@/sanity/config/client-config";
 import { Project } from "@/types/project";
 import { Page } from "@/types/page";
 import { Home } from "@/types/home";
+import { Services } from "@/types/service";
 
 async function getProjects(): Promise<Project[]> {
   return createClient(clientConfig).fetch(
@@ -78,5 +79,22 @@ async function getHomeData(): Promise<Home> {
     }`,
   );
 }
+async function getServices(): Promise<Services> {
+  return createClient(clientConfig).fetch(
+    groq`*[_type == "service"][0]{
+      _id,
+      title,
+      description,
+      "services": services[]{
+        _key,
+        title,
+        description,
+        price,
+        "image": image.asset->url
+      },
+      _createdAt
+    }`,
+  );
+}
 
-export { getProjects, getProject, getPages, getPage, getHomeData };
+export { getProjects, getProject, getPages, getPage, getHomeData, getServices };
