@@ -7,6 +7,9 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Sidebar } from "@/components/side-bar";
 import { SmoothScroll } from "@/components/smooth-scroll";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -33,8 +36,9 @@ export default async function RootLayout({
             <ModeToggle />
             <Sidebar />
             <SmoothScroll>
-              <main className="flex h-full flex-col items-center py-20 lg:ml-64">
+              <main className="flex h-full translate-y-20 flex-col items-center py-20 transition-all lg:ml-64 lg:translate-y-0">
                 {children}
+                <ToastContainer />
               </main>
             </SmoothScroll>
           </div>
