@@ -96,7 +96,7 @@ const config = {
       animation: {
         "rbg-effect": "rbg-effect 2.5s linear infinite",
         "shadow-rgb": "shadow-rgb 20s linear infinite",
-        "border-effect": "border-effect 2s linear infinite",
+        "border-effect": "border-effect 3.5s linear infinite",
       },
     },
   },
