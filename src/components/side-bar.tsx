@@ -37,10 +37,13 @@ export function Sidebar() {
 
   useEffect(() => {
     if (open && sidebarRef.current) {
-      sidebarRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      const sidebarElement = sidebarRef.current as HTMLElement | null;
+      if (sidebarElement) {
+        sidebarElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
     }
   }, [open]);
 
