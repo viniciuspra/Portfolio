@@ -1,10 +1,24 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, TargetAndTransition } from "framer-motion";
 
 interface Props {
   children: React.ReactNode;
 }
+
+interface InitialProperties {
+  "--x": string;
+  scale: number;
+}
+
+const initialProperties: InitialProperties = {
+  "--x": "100%",
+  scale: 1,
+};
+
+const animate = {
+  "--x": "-100%",
+} as TargetAndTransition;
 
 export default function ShinyButton({ children }: Props) {
   return (
@@ -25,8 +39,8 @@ export default function ShinyButton({ children }: Props) {
       className="relative grid h-12 w-44 place-items-center before:absolute before:h-[52px] before:w-[180px] before:animate-rbg-effect before:rounded-lg before:bg-blue-500"
     >
       <motion.button
-        initial={{ "--x": "100%", scale: 1 }}
-        animate={{ "--x": "-100%" }}
+        initial={initialProperties}
+        animate={animate}
         whileHover={{ scale: 0.98 }}
         transition={{
           repeat: Infinity,
