@@ -14,7 +14,7 @@ export function ModeToggle() {
   };
 
   return (
-    <div className="fixed right-3 top-3 z-50">
+    <div className="fixed right-20 top-[38px] z-[99999] lg:right-4 lg:top-4">
       <Button
         id="dropdownDefaultButton"
         onClick={toggleDropdown}
