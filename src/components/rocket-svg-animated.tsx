@@ -33,11 +33,11 @@ export function RocketSvgAnimated() {
         animate="visible"
         transition={{
           fill: {
-            duration: 2,
+            duration: 1,
             ease: "easeIn",
           },
           default: {
-            duration: 2,
+            duration: 1,
             ease: "easeInOut",
           },
         }}
@@ -49,11 +49,11 @@ export function RocketSvgAnimated() {
         animate="visible"
         transition={{
           fill: {
-            duration: 2,
+            duration: 1,
             ease: "easeIn",
           },
           default: {
-            duration: 2,
+            duration: 1,
             ease: "easeInOut",
           },
         }}
@@ -65,11 +65,11 @@ export function RocketSvgAnimated() {
         animate="visible"
         transition={{
           fill: {
-            duration: 2,
+            duration: 1,
             ease: "easeIn",
           },
           default: {
-            duration: 2,
+            duration: 1,
             ease: "easeInOut",
           },
         }}
@@ -81,11 +81,11 @@ export function RocketSvgAnimated() {
         animate="visible"
         transition={{
           fill: {
-            duration: 2,
+            duration: 1,
             ease: "easeIn",
           },
           default: {
-            duration: 2,
+            duration: 1,
             ease: "easeInOut",
           },
         }}
