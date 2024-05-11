@@ -6,7 +6,12 @@ const nextConfig = {
         protocol: "https",
         hostname: "cdn.sanity.io",
       },
+      {
+        protocol: "https",
+        hostname: "skillicons.dev",
+      },
     ],
+    dangerouslyAllowSVG: true,
   },
 };
 
