@@ -2,7 +2,6 @@
 import React, { useEffect } from "react";
 import { useForm, ValidationError } from "@formspree/react";
 import { toast } from "react-toastify";
-import { Rocket } from "lucide-react";
 import { RocketSvgAnimated } from "./rocket-svg-animated";
 
 export function ContactForm() {
