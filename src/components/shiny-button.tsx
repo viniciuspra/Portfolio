@@ -36,7 +36,7 @@ export default function ShinyButton({ children }: Props) {
           mass: 0.1,
         },
       }}
-      className="relative grid h-12 w-44 place-items-center before:absolute before:h-[52px] before:w-[180px] before:animate-rbg-effect before:rounded-lg before:bg-blue-500"
+      className="relative grid h-12 w-44 place-items-center before:absolute before:h-[calc(100%+6px)] before:w-[calc(100%+6px)] before:animate-rbg-effect before:rounded-lg before:bg-blue-500 lg:w-48"
     >
       <motion.button
         initial={initialProperties}
@@ -59,7 +59,7 @@ export default function ShinyButton({ children }: Props) {
         }}
         className="radial-gradient relative h-full w-full rounded-md shadow-md shadow-foreground/10"
       >
-        <span className="linear-mask relative flex h-full w-full items-center justify-center text-sm font-medium tracking-wide text-foreground md:text-base">
+        <span className="linear-mask relative flex h-full w-full items-center justify-center px-1 text-xs font-medium tracking-wide text-foreground md:text-base">
           {children}
         </span>
         <span className="linear-overlay absolute inset-0 block rounded-md p-px" />
