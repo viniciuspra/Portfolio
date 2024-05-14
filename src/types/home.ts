@@ -5,8 +5,10 @@ type Home = {
   title: string;
   position: PortableTextBlock[];
   specialization: string;
+  buttonText: string;
   slogan: string;
   services: Service[];
+  formTitle: string;
   _createdAt: Date;
 }[];
 
