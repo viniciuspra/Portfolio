@@ -23,6 +23,12 @@ const homePage = {
       description: "Your area of specialization or expertise",
     },
     {
+      name: "buttonText",
+      title: "Button Text",
+      type: "string",
+      description: "Button text",
+    },
+    {
       name: "slogan",
       title: "Slogan",
       type: "string",
@@ -57,6 +63,11 @@ const homePage = {
         },
       ],
       description: "Additional services or expertise you offer",
+    },
+    {
+      name: "formTitle",
+      title: "Form Title",
+      type: "string",
     },
   ],
 };
