@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { delay, motion } from "framer-motion";
 
 interface DivAnimationProps {
   children: React.ReactNode;
@@ -8,6 +8,7 @@ interface DivAnimationProps {
   x?: number;
   y?: number;
   delay?: number;
+  duration?: number;
   ChildrenAnimation?: boolean;
 }
 
@@ -17,6 +18,7 @@ export function DivAnimation({
   y,
   className,
   delay = 0.3,
+  duration = 0.3,
   ChildrenAnimation = false,
 }: DivAnimationProps) {
   const ChildrenVariant = {
@@ -25,8 +27,8 @@ export function DivAnimation({
       opacity: 1,
       transition: {
         staggerChildren: 0.25,
-        delay: 0.3,
-        delayChildren: 0.3,
+        delay,
+        delayChildren: delay,
       },
     },
   };
@@ -37,7 +39,7 @@ export function DivAnimation({
       opacity: 1,
       y: 0,
       x: 0,
-      transition: { duration: 0.3, ease: "easeIn", delay },
+      transition: { duration, ease: "easeIn", delay },
     },
   };
   return (
