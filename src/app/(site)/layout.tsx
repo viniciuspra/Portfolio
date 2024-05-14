@@ -9,6 +9,7 @@ import { SmoothScroll } from "@/components/smooth-scroll";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getPages } from "@/sanity/sanity-utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,7 +37,7 @@ export default async function RootLayout({
             <ModeToggle />
             <Sidebar />
             <SmoothScroll>
-              <main className="flex h-full pt-40 lg:pt-20 flex-col items-center pb-20 transition-all lg:ml-64 lg:translate-y-0">
+              <main className="flex h-full flex-col items-center pb-20 pt-40 transition-all lg:ml-64 lg:translate-y-0 lg:pt-20">
                 {children}
                 <ToastContainer />
               </main>
