@@ -4,7 +4,16 @@ import { useForm, ValidationError } from "@formspree/react";
 import { toast } from "react-toastify";
 import { RocketSvgAnimated } from "./rocket-svg-animated";
 
-export function ContactForm() {
+interface Props {
+  form: {
+    name: string;
+    email: string;
+    message: string;
+    button: string;
+  };
+}
+
+export function ContactForm({ form }: Props) {
   const [state, handleSubmit] = useForm("xwkgydle");
 
   useEffect(() => {
@@ -24,7 +33,7 @@ export function ContactForm() {
       >
         <div className="flex gap-4">
           <label htmlFor="name" className="flex w-full flex-col gap-2">
-            <span className="text-lg font-bold">Name</span>
+            <span className="text-lg font-bold">{form.name}</span>
             <input
               id="name"
               type="name"
@@ -34,7 +43,7 @@ export function ContactForm() {
           </label>
 
           <label htmlFor="email" className="flex w-full flex-col gap-2">
-            <span className="text-lg font-bold">Email</span>
+            <span className="text-lg font-bold">{form.email}</span>
             <input
               id="email"
               type="email"
@@ -50,7 +59,7 @@ export function ContactForm() {
           </label>
         </div>
         <label htmlFor="message" className="flex flex-col gap-2">
-          <span className="text-lg font-bold">Message</span>
+          <span className="text-lg font-bold">{form.message}</span>
           <textarea
             id="message"
             name="message"
@@ -67,7 +76,7 @@ export function ContactForm() {
           disabled={state.submitting}
           className="rounded-md bg-blue-500 p-3 font-semibold  text-white"
         >
-          Submit
+          {form.button}
         </button>
       </form>
     </>
