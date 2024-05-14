@@ -4,7 +4,7 @@ type Page = {
   _id: string;
   title: string;
   slug: string;
-  content: PortableTextBlock[];
+  image: string;
   _createdAt: Date;
 };
 
