@@ -1,14 +1,24 @@
+"use client";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 interface StackProps {
   image: string;
   title: string;
+  side?: "left" | "right";
 }
 
-export function StackCard({ image, title }: StackProps) {
+export function StackCard({ image, title, side = "left" }: StackProps) {
   return (
-    <div
-      className="flex w-full cursor-pointer items-center gap-4 rounded-md border p-3 transition-all hover:border-foreground/80"
+    <motion.div
+      variants={{
+        hidden: {
+          opacity: 0,
+          translateX: side === "left" ? -100 : side === "right" ? 100 : 0,
+        },
+        visible: { opacity: 1, translateX: 0 },
+      }}
+      className="flex w-full cursor-pointer items-center gap-4 rounded-md border p-3 transition-all ease-linear hover:border-foreground/80"
       title={title}
     >
       <div>
@@ -23,6 +33,6 @@ export function StackCard({ image, title }: StackProps) {
       <div>
         <h2>{title}</h2>
       </div>
-    </div>
+    </motion.div>
   );
 }
