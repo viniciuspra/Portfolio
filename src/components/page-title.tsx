@@ -29,7 +29,7 @@ export function PageTitle({ children, subtitle = "" }: Props) {
             y: 0,
             transition: { duration: 0.3, ease: "easeIn", delay: 0.55 },
           }}
-          className="px-1 text-foreground/80"
+          className="text-foreground/80"
         >
           {subtitle}
         </motion.p>
