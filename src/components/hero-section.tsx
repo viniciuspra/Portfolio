@@ -11,6 +11,7 @@ interface Props {
   title: string;
   position: PortableTextBlock[];
   specialization: string;
+  buttonText: string
 }
 
 const divVariants = {
@@ -25,7 +26,7 @@ const divVariants = {
   },
 };
 
-export function HeroSection({ title, position, specialization }: Props) {
+export function HeroSection({ title, position, specialization, buttonText }: Props) {
   return (
     <motion.div
       variants={divVariants}
@@ -93,7 +94,7 @@ export function HeroSection({ title, position, specialization }: Props) {
       >
         {specialization}
       </motion.p>
-      <ShinyButton>Connect with me</ShinyButton>
+      <ShinyButton>{buttonText}</ShinyButton>
     </motion.div>
   );
 }
