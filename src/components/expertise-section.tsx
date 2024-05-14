@@ -8,9 +8,16 @@ import { ServicesCard } from "./services-card";
 interface Props {
   slogan: string;
   services: Service[];
+  formTitle: string;
+  form: {
+    name: string;
+    email: string;
+    message: string;
+    button: string;
+  };
 }
 
-export function ExpertiseSection({ services, slogan }: Props) {
+export function ExpertiseSection({ services, slogan, formTitle, form }: Props) {
   const containerRef = useRef(null);
 
   const isInView = useInView(containerRef, { once: true });
@@ -72,7 +79,7 @@ export function ExpertiseSection({ services, slogan }: Props) {
             }}
             className="w-full text-center text-4xl font-bold text-slate-950/80 dark:text-primary/95"
           >
-            Tell me about your next project
+            {formTitle}
           </motion.h1>
           <motion.div
             variants={{
@@ -84,7 +91,7 @@ export function ExpertiseSection({ services, slogan }: Props) {
               },
             }}
           >
-            <ContactForm />
+            <ContactForm form={form} />
           </motion.div>
         </div>
       </motion.div>
