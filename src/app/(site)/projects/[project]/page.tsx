@@ -29,7 +29,7 @@ export default async function Project({ params }: ProjectParams) {
               className="font-medium uppercase text-gray-400 transition hover:text-primary/90 md:text-lg"
               title="View Project Website"
             >
-              View Project
+              Ver Projeto
             </Link>
             <Link
               href={project.github}

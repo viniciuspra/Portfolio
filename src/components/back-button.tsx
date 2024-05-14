@@ -19,7 +19,7 @@ export function BackButton({ href }: { href: string }) {
           variant="link"
           className="hover absolute -left-4 -top-12 gap-2 text-lg"
         >
-          <ArrowLeft className="underline" /> Back
+          <ArrowLeft className="underline" /> Voltar
         </Button>
       </Link>
     </motion.div>
