@@ -1,6 +1,6 @@
 const service = {
   name: "service",
-  title: "Service Section",
+  title: "Service Page",
   type: "document",
   fields: [
     {
