@@ -1,7 +1,16 @@
 import { PortableTextBlock } from "sanity";
 
+type ProjectPage = {
+  _id: string;
+  title: string;
+  description: string;
+  _createdAt: Date;
+};
+
 type Project = {
   _id: string;
+  title: string;
+  description: string;
   name: string;
   subtitle: string;
   url: string;
@@ -16,4 +25,4 @@ type ProjectParams = {
   params: { project: string };
 };
 
-export type { Project, ProjectParams };
+export type { Project, ProjectParams, ProjectPage };
