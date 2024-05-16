@@ -54,26 +54,13 @@ async function getProject(slug: string): Promise<Project> {
 
 async function getPages(): Promise<Page[]> {
   return createClient(clientConfig).fetch(
-    groq`*[_type == "page"]{
+    groq`*[_type == "page"] | order(_createdAt asc){
       _id,
       title,
       "slug": slug.current,
-      "image": image.asset->url,
+      "group": groups[0].groupName,
       _createdAt
     }`,
-  );
-}
-
-async function getPage(slug: string): Promise<Page> {
-  return createClient(clientConfig).fetch(
-    groq`*[_type == "page" && slug.current == $slug][0]{
-      _id,
-      title,
-      "slug": slug.current,
-      content,
-      _createdAt
-    }`,
-    { slug },
   );
 }
 
@@ -154,7 +141,6 @@ export {
   getProject,
   getProjectsPage,
   getPages,
-  getPage,
   getHomeData,
   getServices,
   getContactData,

@@ -1,10 +1,8 @@
-import { PortableTextBlock } from "sanity";
-
 type Page = {
   _id: string;
   title: string;
   slug: string;
-  image: string;
+  group: string;
   _createdAt: Date;
 };
 

@@ -18,12 +18,22 @@ const page = {
       },
     },
     {
-      name: "image",
-      title: "Image",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
+      name: "groups",
+      title: "Groups",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            {
+              name: "groupName",
+              title: "Group Name",
+              type: "string",
+              description: "Name of the group to which this page belongs",
+            },
+          ],
+        },
+      ],
     },
   ],
 };

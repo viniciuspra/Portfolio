@@ -13,8 +13,9 @@ export default async function ContactPage() {
 
   return (
     <DivAnimation className="relative min-h-screen px-10 md:max-w-[800px] xl:max-w-[1200px]">
-      <PageTitle subtitle={data.subtitle}>{data.title}</PageTitle>
-
+      <div className="pb-3 lg:pb-5">
+        <PageTitle subtitle={data.subtitle}>{data.title}</PageTitle>
+      </div>
       <DivAnimation>
         <Link
           href="mailto:vinicius.cascaesp@gmail.com"
@@ -29,7 +30,6 @@ export default async function ContactPage() {
           <Phone /> Celular
         </Link>
       </DivAnimation>
-
       <DivAnimation>
         <ContactForm form={data.form} />
       </DivAnimation>
