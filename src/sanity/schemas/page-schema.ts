@@ -6,6 +6,11 @@ const page = {
     {
       name: "title",
       title: "Title",
+      type: "localeString",
+    },
+    {
+      name: "icon",
+      title: "Icon",
       type: "string",
     },
     {
@@ -36,6 +41,11 @@ const page = {
       ],
     },
   ],
+  preview: {
+    select: {
+      title: "title.en",
+    },
+  },
 };
 
 export default page;

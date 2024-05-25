@@ -10,10 +10,28 @@ const favorites = {
       description: "The main title for the favorite",
     },
     {
+      name: "url",
+      title: "Url",
+      type: "url",
+    },
+    {
       name: "description",
       title: "Description",
-      type: "array",
-      of: [{ type: "block" }],
+      type: "object",
+      fields: [
+        {
+          name: "en",
+          title: "en",
+          type: "array",
+          of: [{ type: "block" }],
+        },
+        {
+          name: "pt",
+          title: "pt",
+          type: "array",
+          of: [{ type: "block" }],
+        },
+      ],
       description: "The Favorite description",
     },
     {

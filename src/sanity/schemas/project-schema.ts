@@ -6,17 +6,22 @@ const projectPage = {
     {
       name: "title",
       title: "Title",
-      type: "string",
+      type: "localeString",
       description: "The title of the project page.",
     },
     {
       name: "description",
       title: "Description",
-      type: "string",
+      type: "localeString",
       description:
-        "The description or additional information for the proejct page.",
+        "The description or additional information for the project page.",
     },
   ],
+  preview: {
+    select: {
+      title: "title.en",
+    },
+  },
 };
 
 const project = {
@@ -32,7 +37,7 @@ const project = {
     {
       name: "subtitle",
       title: "Subtitle",
-      type: "string",
+      type: "localeString",
     },
     {
       name: "slug",
@@ -71,8 +76,21 @@ const project = {
     {
       name: "content",
       title: "Content",
-      type: "array",
-      of: [{ type: "block" }],
+      type: "object",
+      fields: [
+        {
+          name: "en",
+          title: "en",
+          type: "array",
+          of: [{ type: "block" }],
+        },
+        {
+          name: "pt",
+          title: "pt",
+          type: "array",
+          of: [{ type: "block" }],
+        },
+      ],
     },
   ],
 };

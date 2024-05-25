@@ -6,13 +6,13 @@ const service = {
     {
       name: "title",
       title: "Title",
-      type: "string",
+      type: "localeString",
       description: "The main title for the service section",
     },
     {
       name: "description",
       title: "Description",
-      type: "string",
+      type: "localeString",
       description: "The main description for the service section",
     },
     {
@@ -26,19 +26,19 @@ const service = {
             {
               name: "title",
               title: "Title",
-              type: "string",
+              type: "localeString",
               description: "The title of the service",
             },
             {
               name: "description",
               title: "Description",
-              type: "string",
+              type: "localeString",
               description: "A brief description of the service",
             },
             {
               name: "price",
               title: "Price",
-              type: "string",
+              type: "localeString",
               description: "The price of the service",
             },
             {
@@ -48,11 +48,22 @@ const service = {
               description: "An image representing the service",
             },
           ],
+          preview: {
+            select: {
+              title: "title.en",
+              media: "image.asset",
+            },
+          },
         },
       ],
       description: "Additional services or expertise you offer",
     },
   ],
+  preview: {
+    select: {
+      title: "title.en",
+    },
+  },
 };
 
 export default service;

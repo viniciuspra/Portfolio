@@ -5,6 +5,7 @@ import service from "@/sanity/schemas/service-schema";
 import favorites from "@/sanity/schemas/favorites-schema";
 import contact from "@/sanity/schemas/contact-schema";
 import StackPage from "@/sanity/schemas/stack-schema";
+import localeString from "@/sanity/schemas/types/localeString";
 
 const schemas = [
   project,
@@ -15,6 +16,7 @@ const schemas = [
   favorites,
   contact,
   StackPage,
+  localeString,
 ];
 
 export default schemas;

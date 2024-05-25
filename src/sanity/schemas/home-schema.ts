@@ -6,32 +6,44 @@ const homePage = {
     {
       name: "title",
       title: "Title",
-      type: "string",
-      description: "The main title for the hero section",
+      type: "localeString",
     },
     {
       name: "position",
       title: "Position",
-      type: "array",
-      of: [{ type: "block" }],
+      type: "object",
+      fields: [
+        {
+          name: "en",
+          title: "en",
+          type: "array",
+          of: [{ type: "block" }],
+          description: "Your position in English",
+        },
+        {
+          name: "pt",
+          title: "pt",
+          type: "array",
+          of: [{ type: "block" }],
+          description: "Sua posição em português",
+        },
+      ],
       description: "Your position",
     },
     {
       name: "specialization",
       title: "Specialization",
-      type: "string",
-      description: "Your area of specialization or expertise",
+      type: "localeString",
     },
     {
       name: "buttonText",
       title: "Button Text",
-      type: "string",
-      description: "Button text",
+      type: "localeString",
     },
     {
       name: "slogan",
       title: "Slogan",
-      type: "string",
+      type: "localeString",
     },
     {
       name: "services",
@@ -44,14 +56,12 @@ const homePage = {
             {
               name: "title",
               title: "Title",
-              type: "string",
-              description: "The title of the service",
+              type: "localeString",
             },
             {
               name: "description",
               title: "Description",
-              type: "string",
-              description: "A brief description of the service",
+              type: "localeString",
             },
             {
               name: "image",
@@ -60,6 +70,12 @@ const homePage = {
               description: "An image representing the service",
             },
           ],
+          preview: {
+            select: {
+              title: "title.en",
+              media: "image.asset",
+            },
+          },
         },
       ],
       description: "Additional services or expertise you offer",
@@ -67,9 +83,14 @@ const homePage = {
     {
       name: "formTitle",
       title: "Form Title",
-      type: "string",
+      type: "localeString",
     },
   ],
+  preview: {
+    select: {
+      title: "title.en",
+    },
+  },
 };
 
 export default homePage;

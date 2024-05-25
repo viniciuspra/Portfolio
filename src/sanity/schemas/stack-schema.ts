@@ -6,13 +6,13 @@ const StackPage = {
     {
       name: "title",
       title: "Title",
-      type: "string",
+      type: "localeString",
       description: "The title of the Stack page.",
     },
     {
       name: "subtitle",
       title: "Subtitle",
-      type: "string",
+      type: "localeString",
       description: "The subtitle or additional information for the Stack page.",
     },
     {
@@ -26,7 +26,21 @@ const StackPage = {
             {
               name: "category",
               title: "Category",
-              type: "string",
+              type: "object",
+              fields: [
+                {
+                  name: "en",
+                  title: "en",
+                  type: "string",
+                  description: "Category in English",
+                },
+                {
+                  name: "pt",
+                  title: "pt",
+                  type: "string",
+                  description: "Category in Portuguese",
+                },
+              ],
               description:
                 "The category of technologies (e.g., frontend, backend).",
             },
@@ -57,6 +71,11 @@ const StackPage = {
               description: "Technologies within this category.",
             },
           ],
+          preview: {
+            select: {
+              category: "category.en",
+            },
+          },
         },
       ],
       description: "Technologies used in your projects, categorized by type.",
@@ -64,7 +83,7 @@ const StackPage = {
   ],
   preview: {
     select: {
-      title: "title",
+      title: "title.en",
     },
   },
 };
