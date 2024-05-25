@@ -51,7 +51,7 @@ export function Sidebar() {
         >
           <Link
             href={"/"}
-            className="group flex h-28 items-center px-5 focus:outline-none"
+            className="group flex h-28 items-center justify-center md:px-5 focus:outline-none"
           >
             <div className="flex gap-3 group-focus:ring-2 group-focus:ring-foreground">
               <RocketSvgAnimated />
