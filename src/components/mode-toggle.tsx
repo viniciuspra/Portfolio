@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
-import { useTheme } from "next-themes";
-
 import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useState } from "react";
+
 import { Button } from "@/components/button";
 
 export function ModeToggle() {
@@ -14,7 +14,7 @@ export function ModeToggle() {
   };
 
   return (
-    <div className="fixed right-20 top-[38px] z-[99999] lg:right-4 lg:top-4">
+    <div className="absolute right-[68px] top-[38px] z-[99999] lg:fixed lg:right-4 lg:top-4">
       <Button
         id="dropdownDefaultButton"
         onClick={toggleDropdown}
