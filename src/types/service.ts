@@ -14,4 +14,4 @@ type Service = {
   image: string;
 };
 
-export type { Services, Service };
+export type { Service, Services };

@@ -1,6 +1,6 @@
 "use client";
-import React from "react";
 import { motion, TargetAndTransition } from "framer-motion";
+import React from "react";
 
 interface Props {
   children: React.ReactNode;

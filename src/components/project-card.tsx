@@ -1,11 +1,11 @@
 "use client";
-import { useRef, useEffect } from "react";
-import { useInView, useAnimation, motion, animate } from "framer-motion";
-import { Project } from "@/types/project";
-
-import { PortableText } from "next-sanity";
+import { motion, useAnimation, useInView } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { PortableText } from "next-sanity";
+import { useEffect, useRef } from "react";
+
+import { Project } from "@/types/project";
 
 interface Props {
   projects: Project[];
@@ -21,7 +21,7 @@ export function ProjectCard({ projects }: Props) {
     if (isInView) {
       mainControls.start("visible");
     }
-  }, [isInView]);
+  }, [isInView, mainControls]);
 
   return (
     <motion.div

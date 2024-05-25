@@ -1,7 +1,7 @@
 "use client";
-import React, { useRef, useState, useCallback, useLayoutEffect } from "react";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
 import ResizeObserver from "resize-observer-polyfill";
-import { useScroll, useTransform, useSpring, motion } from "framer-motion";
 
 interface Props {
   children: React.ReactNode;

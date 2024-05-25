@@ -1,8 +1,9 @@
 "use client";
-import { ArrowLeft } from "lucide-react";
-import { Button } from "@/components/button";
-import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+
+import { Button } from "@/components/button";
 
 export function BackButton({ href }: { href: string }) {
   return (
