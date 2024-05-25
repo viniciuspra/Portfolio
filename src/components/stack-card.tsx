@@ -28,6 +28,7 @@ export function StackCard({ image, title, side = "left" }: StackProps) {
           height={40}
           alt=""
           className="rounded-full"
+          priority
         />
       </div>
       <div>
