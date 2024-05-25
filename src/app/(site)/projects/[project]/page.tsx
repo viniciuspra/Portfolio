@@ -1,18 +1,18 @@
-import { ProjectParams } from "@/types/project";
-import { getProject } from "@/sanity/sanity-utils";
-import { PortableText } from "next-sanity";
-import Link from "next/link";
-
-import { PageTitle } from "@/components/page-title";
-import { BackButton } from "@/components/back-button";
-import { ProjectImageBorder } from "@/components/project-image-border";
-
 import { Github } from "lucide-react";
+import Link from "next/link";
+import { PortableText } from "next-sanity";
+
+import { BackButton } from "@/components/back-button";
 import { DivAnimation } from "@/components/div-animation";
+import { PageTitle } from "@/components/page-title";
+import { ProjectImageBorder } from "@/components/project-image-border";
+import { getProject } from "@/sanity/sanity-utils";
+import { ProjectParams } from "@/types/project";
+import { getCurrentLanguage } from "@/utils/language";
 
 export default async function Project({ params }: ProjectParams) {
   const slug = params.project;
-  const project = await getProject(slug);
+  const project = await getProject(slug, getCurrentLanguage());
 
   return (
     <div className="mx-auto h-full max-w-4xl px-10 xl:max-w-5xl">

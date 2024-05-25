@@ -1,48 +1,61 @@
 "use client";
-import { getPages } from "@/sanity/sanity-utils";
-import { Page } from "@/types/page";
 import {
-  Package,
-  Puzzle,
-  Phone,
   Bookmark,
+  Compass,
+  FileText,
+  Github,
   Layers,
   Linkedin,
-  Github,
-  FileText,
-  Compass,
+  Package,
+  Phone,
+  Puzzle,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-type IconMapType = {
-  [key: string]: JSX.Element;
-};
+import { getPages } from "@/sanity/sanity-utils";
+import { Page } from "@/types/page";
+import { getCurrentLanguage, Lang } from "@/utils/language";
 
-const iconMap: IconMapType = {
-  explore: <Compass size={16} />,
-  services: <Package size={16} />,
-  projects: <Puzzle size={16} />,
-  contact: <Phone size={16} />,
-  favorites: <Bookmark size={16} />,
-  stack: <Layers size={16} />,
-  LinkedIn: <Linkedin size={16} />,
-  GitHub: <Github size={16} />,
+import { Loading } from "./loading";
+
+const iconMap: { [key: string]: React.FC } = {
+  Bookmark,
+  Compass,
+  FileText,
+  Github,
+  Linkedin,
+  Layers,
+  Package,
+  Phone,
+  Puzzle,
 };
 
 export function SideBarItems() {
   const pathname = usePathname();
   const [items, setItems] = useState<Page[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchPages = async (language: Lang) => {
+    try {
+      setIsLoading(true);
+      const pages = await getPages(language);
+      setItems(pages);
+    } catch (error) {
+      console.log("Error fetching pages", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    async function fetchPages() {
-      const pages = await getPages();
-      setItems(pages);
-    }
-    fetchPages();
+    fetchPages(getCurrentLanguage());
   }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   const groupItemsByGroup = (
     items: Page[],
@@ -65,16 +78,16 @@ export function SideBarItems() {
   const sideBarItemStyle =
     "truncate text-sm tracking-wide group-hover:text-foreground group-hover:font-medium";
   const sideBarIconStyle =
-    "inline-flex items-center justify-center rounded-lg border p-1 group-hover:bg-blue-500 group-hover:text-white";
+    "inline-flex items-center justify-center rounded-lg border p-1 group-hover:bg-blue-500 group-hover:text-white size-7";
   const sideBarLinkStyle =
     "group relative flex h-10 flex-row items-center gap-2 rounded-lg px-2 pr-6 transition-all hover:bg-accent group-focus:ring-2";
 
   return (
-    <ul className="flex flex-col space-y-2 py-3 md:px-4 lg:px-6">
+    <ul className="flex flex-col space-y-2 lg:px-6">
       {Object.keys(groupedItems).map((groupName) => (
         <React.Fragment key={groupName}>
           {groupName !== "Other" && (
-            <li className="pt-6">
+            <li className="pt-4">
               <div className="flex h-6 flex-row items-center">
                 <div className="text-sm font-light tracking-wide">
                   {groupName}
@@ -84,32 +97,29 @@ export function SideBarItems() {
           )}
           {groupedItems[groupName].map((item) => {
             const isHome = item.slug === "/";
-            const icon = isHome ? (
-              <Compass size={16} />
-            ) : (
-              iconMap[item.slug] || <FileText size={16} />
-            );
+            const IconComponent = iconMap[item.icon];
             const href = isHome ? "/" : `/${item.slug}`;
-
+            const haveProjectInPath =
+              item.title === "Projects" && pathname.includes("/projects");
             return (
-              <>
+              <React.Fragment key={item._id}>
                 {item.group !== "Socials" && (
-                  <li key={item._id} className="group cursor-pointer">
+                  <li className="group cursor-pointer">
                     <Link href={href} className={sideBarLinkStyle}>
                       <span
-                        className={`${pathname === href ? "bg-blue-500 text-white" : "text-foreground/80 dark:text-muted-foreground/80"} ${sideBarIconStyle}`}
+                        className={`${pathname === href || haveProjectInPath ? "bg-blue-500 text-white" : "text-foreground/80 dark:text-muted-foreground/80"} ${sideBarIconStyle}`}
                       >
-                        {icon}
+                        <IconComponent />
                       </span>
                       <span
-                        className={`${pathname === href ? "text-foreground dark:text-white" : "text-muted-foreground/90 dark:text-muted-foreground/80"} ${sideBarItemStyle}`}
+                        className={`${pathname === href || haveProjectInPath ? "text-foreground dark:text-white" : "text-muted-foreground/90 dark:text-muted-foreground/80"} ${sideBarItemStyle}`}
                       >
                         {item.title}
                       </span>
                     </Link>
                   </li>
                 )}
-              </>
+              </React.Fragment>
             );
           })}
         </React.Fragment>
@@ -117,16 +127,23 @@ export function SideBarItems() {
 
       {items
         .filter((item) => item.group === "Socials")
-        .map((item) => (
-          <li key={item._id} className="group cursor-pointer">
-            <Link href={item.slug} target="_blank" className={sideBarLinkStyle}>
-              <span className={sideBarIconStyle}>
-                {iconMap[item.title] || <FileText size={16} />}
-              </span>
-              <span className={sideBarItemStyle}>{item.title}</span>
-            </Link>
-          </li>
-        ))}
+        .map((item) => {
+          const IconComponent = iconMap[item.icon];
+          return (
+            <li key={item._id} className="group cursor-pointer">
+              <Link
+                href={item.slug}
+                target="_blank"
+                className={sideBarLinkStyle}
+              >
+                <span className={sideBarIconStyle}>
+                  <IconComponent />
+                </span>
+                <span className={sideBarItemStyle}>{item.title}</span>
+              </Link>
+            </li>
+          );
+        })}
     </ul>
   );
 }

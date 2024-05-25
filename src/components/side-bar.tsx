@@ -1,13 +1,16 @@
 "use client";
+import { useMediaQuery } from "@react-hook/media-query";
 import { Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { RocketSvgAnimated } from "./rocket-svg-animated";
 import { useEffect, useRef, useState } from "react";
-import { useMediaQuery } from "@react-hook/media-query";
+
 import { Button } from "./button";
-import { SmoothScroll } from "./smooth-scroll";
+import { LanguageSwitcher } from "./language-selector";
+import { ModeToggle } from "./mode-toggle";
+import { RocketSvgAnimated } from "./rocket-svg-animated";
 import { SideBarItems } from "./side-bar-items";
+import { SmoothScroll } from "./smooth-scroll";
 
 export function Sidebar() {
   const [open, setOpen] = useState(false);
@@ -48,7 +51,7 @@ export function Sidebar() {
         >
           <Link
             href={"/"}
-            className="group flex h-28 items-center focus:outline-none md:px-6 lg:px-8"
+            className="group flex h-28 items-center px-5 focus:outline-none"
           >
             <div className="flex gap-3 group-focus:ring-2 group-focus:ring-foreground">
               <RocketSvgAnimated />
@@ -61,6 +64,10 @@ export function Sidebar() {
               </h1>
             </div>
           </Link>
+          <div className="lg:hidden">
+            <ModeToggle />
+            <LanguageSwitcher />
+          </div>
           <Button
             className="z-50 p-2 lg:hidden"
             variant="outline"
@@ -70,7 +77,7 @@ export function Sidebar() {
           </Button>
         </div>
         {!isMobile && (
-          <div className="z-40 h-full overflow-y-auto overflow-x-hidden lg:flex-grow">
+          <div className="z-40 flex h-full flex-col overflow-y-auto overflow-x-hidden lg:flex-grow">
             <SideBarItems />
           </div>
         )}
@@ -79,7 +86,7 @@ export function Sidebar() {
             <div className="z-50 flex w-full items-center justify-between px-5">
               <Link
                 href={"/"}
-                className="group flex h-28 items-center px-6 focus:outline-none"
+                className="group flex h-28 items-center px-5 focus:outline-none"
               >
                 <div className="flex gap-3 group-focus:ring-2 group-focus:ring-foreground">
                   <RocketSvgAnimated />
@@ -92,15 +99,17 @@ export function Sidebar() {
                   </h1>
                 </div>
               </Link>
+              <ModeToggle />
+              <LanguageSwitcher />
               <Button
-                className="z-[9999] p-2"
+                className="z-50 p-2"
                 variant="outline"
                 onClick={() => setOpen(!open)}
               >
                 <Menu />
               </Button>
             </div>
-            <div className="z-40 min-h-screen overflow-y-auto overflow-x-hidden px-5 transition-none lg:flex-grow">
+            <div className="z-40 min-h-screen overflow-y-auto overflow-x-hidden px-7 transition-all lg:flex-grow">
               <SideBarItems />
             </div>
           </SmoothScroll>

@@ -1,15 +1,60 @@
+"use client";
+import { Mail, Phone } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
 import { ContactForm } from "@/components/contact-form";
 import { DivAnimation } from "@/components/div-animation";
+import { Loading } from "@/components/loading";
 import { PageTitle } from "@/components/page-title";
-
 import { getContactData } from "@/sanity/sanity-utils";
+import { Contact } from "@/types/contact";
+import { getCurrentLanguage, Lang } from "@/utils/language";
 
-import { Mail, Phone } from "lucide-react";
+export default function ContactPage() {
+  const [data, setData] = useState<Contact | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-import Link from "next/link";
+  const fetchData = async (language: Lang) => {
+    try {
+      setIsLoading(true);
+      const cachedData = localStorage.getItem(`serviceData-${language}`);
+      if (cachedData) {
+        const parsedData = JSON.parse(cachedData);
+        setData(parsedData);
+        setIsLoading(false);
 
-export default async function ContactPage() {
-  const data = await getContactData();
+        const newData = await getContactData(language);
+        if (JSON.stringify(parsedData) !== JSON.stringify(newData)) {
+          localStorage.setItem(
+            `serviceData-${language}`,
+            JSON.stringify(newData),
+          );
+          setData(newData);
+        }
+        return;
+      }
+      const newData = await getContactData(language);
+      localStorage.setItem(`serviceData-${language}`, JSON.stringify(newData));
+      setData(newData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData(getCurrentLanguage());
+  }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (!data) {
+    return;
+  }
 
   return (
     <DivAnimation className="relative min-h-screen px-10 md:max-w-[800px] xl:max-w-[1200px]">
