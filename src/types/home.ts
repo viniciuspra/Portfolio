@@ -10,7 +10,7 @@ type Home = {
   services: Service[];
   formTitle: string;
   _createdAt: Date;
-}[];
+};
 
 type Service = {
   description: string;
