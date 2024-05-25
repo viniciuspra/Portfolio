@@ -95,7 +95,7 @@ export function HeroSection({ data }: HeroProps) {
       >
         {data.specialization}
       </motion.p>
-      <ShinyButton>{data.buttonText}</ShinyButton>
+      <ShinyButton href="/contact">{data.buttonText}</ShinyButton>
     </motion.div>
   );
 }
