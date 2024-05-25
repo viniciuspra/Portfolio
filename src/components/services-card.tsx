@@ -28,7 +28,7 @@ export function ServicesCard({
             <div className="flex items-center gap-4">
               <Image src={image} width={30} height={30} alt="" />
               <span className="rounded-md border bg-accent p-0.5 px-2 text-foreground/80 transition-all group-hover:text-foreground">
-                R$ {price}
+                {price}
               </span>
             </div>
           ) : (
