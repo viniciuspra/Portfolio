@@ -1,16 +1,19 @@
 "use client";
-import React, { useEffect } from "react";
 import { useForm, ValidationError } from "@formspree/react";
+import React, { useEffect } from "react";
 import { toast } from "react-toastify";
+
 import { RocketSvgAnimated } from "./rocket-svg-animated";
 
 interface Props {
-  form: {
-    name: string;
-    email: string;
-    message: string;
-    button: string;
-  };
+  form:
+    | {
+        name: string;
+        email: string;
+        message: string;
+        button: string;
+      }
+    | undefined;
 }
 
 export function ContactForm({ form }: Props) {
@@ -24,6 +27,8 @@ export function ContactForm({ form }: Props) {
       });
     }
   }, [state.succeeded]);
+
+  if (!form) return;
 
   return (
     <>

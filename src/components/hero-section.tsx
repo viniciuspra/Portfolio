@@ -1,18 +1,11 @@
 "use client";
+import { motion } from "framer-motion";
+import { PortableText } from "next-sanity";
 import React from "react";
 
-import { PortableTextBlock } from "sanity";
-import { PortableText } from "next-sanity";
-import { motion } from "framer-motion";
+import { Home } from "@/types/home";
 
 import ShinyButton from "./shiny-button";
-
-interface Props {
-  title: string;
-  position: PortableTextBlock[];
-  specialization: string;
-  buttonText: string
-}
 
 const divVariants = {
   hidden: {
@@ -26,7 +19,15 @@ const divVariants = {
   },
 };
 
-export function HeroSection({ title, position, specialization, buttonText }: Props) {
+type HeroProps = {
+  data: Home;
+};
+
+export function HeroSection({ data }: HeroProps) {
+  if (!data || !data.title) {
+    return null;
+  }
+
   return (
     <motion.div
       variants={divVariants}
@@ -49,7 +50,7 @@ export function HeroSection({ title, position, specialization, buttonText }: Pro
         }}
         className="mx-auto text-3xl font-extrabold leading-tight -tracking-wide text-slate-700 dark:text-blue-100/95 md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl"
       >
-        {title.split(" ").map((word, index, array) => (
+        {data.title.split(" ").map((word, index, array) => (
           <React.Fragment key={index}>
             {word}
             {index < array.length - 1 && index === 1 && <br />}
@@ -75,7 +76,7 @@ export function HeroSection({ title, position, specialization, buttonText }: Pro
         }}
         className="pt-3 text-sm font-medium text-slate-900/70 dark:text-blue-50/80 md:text-base"
       >
-        <PortableText value={position} />
+        <PortableText value={data.position} />
       </motion.div>
       <motion.p
         variants={{
@@ -92,9 +93,9 @@ export function HeroSection({ title, position, specialization, buttonText }: Pro
         }}
         className="flex-wrap pb-3 text-sm font-medium text-slate-900/70 dark:text-blue-50/60 md:text-base"
       >
-        {specialization}
+        {data.specialization}
       </motion.p>
-      <ShinyButton>{buttonText}</ShinyButton>
+      <ShinyButton>{data.buttonText}</ShinyButton>
     </motion.div>
   );
 }

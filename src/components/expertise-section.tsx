@@ -1,14 +1,14 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import { Service } from "@/types/home";
 import { motion, useAnimation, useInView } from "framer-motion";
+import React, { useEffect, useRef } from "react";
+
+import { Home } from "@/types/home";
+
 import { ContactForm } from "./contact-form";
 import { ServicesCard } from "./services-card";
 
-interface Props {
-  slogan: string;
-  services: Service[];
-  formTitle: string;
+interface ExpertiseSectionProps {
+  data: Home;
   form: {
     name: string;
     email: string;
@@ -17,7 +17,7 @@ interface Props {
   };
 }
 
-export function ExpertiseSection({ services, slogan, formTitle, form }: Props) {
+export function ExpertiseSection({ data, form }: ExpertiseSectionProps) {
   const containerRef = useRef(null);
 
   const isInView = useInView(containerRef, { once: true });
@@ -38,7 +38,7 @@ export function ExpertiseSection({ services, slogan, formTitle, form }: Props) {
           transition={{ delay: 0.3, ease: "easeIn" }}
           className="text-center text-lg font-extrabold leading-tight -tracking-wide opacity-90 md:px-20 md:text-xl lg:text-2xl xl:text-3xl"
         >
-          {slogan}
+          {data.slogan}
         </motion.h2>
       </div>
       <motion.div
@@ -58,7 +58,7 @@ export function ExpertiseSection({ services, slogan, formTitle, form }: Props) {
         ref={containerRef}
         className="space-y-7 px-5"
       >
-        {services.map((service) => (
+        {data.services.map((service) => (
           <React.Fragment key={service._key}>
             <ServicesCard
               title={service.title}
@@ -79,7 +79,7 @@ export function ExpertiseSection({ services, slogan, formTitle, form }: Props) {
             }}
             className="w-full text-center text-4xl font-bold text-slate-950/80 dark:text-primary/95"
           >
-            {formTitle}
+            {data.formTitle}
           </motion.h1>
           <motion.div
             variants={{

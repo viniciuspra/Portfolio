@@ -7,9 +7,9 @@ interface Props {
   subtitle?: string;
 }
 
-export function PageTitle({ children, subtitle = "" }: Props) {
+export function PageTitle({ children, subtitle }: Props) {
   return (
-    <div className={`${subtitle.trim() !== "" && "w-full space-y-3 py-2"}`}>
+    <div className={`${subtitle?.trim() !== "" && "w-full space-y-3 py-2"}`}>
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{
@@ -21,7 +21,7 @@ export function PageTitle({ children, subtitle = "" }: Props) {
       >
         {children}
       </motion.h1>
-      {subtitle.trim() !== "" && (
+      {subtitle?.trim() !== "" && (
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{
