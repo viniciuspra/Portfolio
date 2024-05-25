@@ -25,4 +25,4 @@ type ProjectParams = {
   params: { project: string };
 };
 
-export type { Project, ProjectParams, ProjectPage };
+export type { Project, ProjectPage, ProjectParams };
