@@ -63,7 +63,7 @@ export default function StackPage() {
           (category, index) =>
             index === 0 && (
               <div key={category.category} className="flex flex-col gap-4">
-                <h3 className="text-2xl font-bold text-blue-100/95 first-letter:uppercase">
+                <h3 className="text-2xl font-bold text-slate-700/85 first-letter:uppercase dark:text-blue-100/95">
                   {category.category}
                 </h3>
                 <div className="space-y-3">
@@ -87,7 +87,7 @@ export default function StackPage() {
             (category) =>
               category.category === "Front-end" && (
                 <div key={category.category} className="flex flex-col gap-4">
-                  <h3 className="text-2xl font-bold text-blue-100/95 first-letter:uppercase">
+                  <h3 className="text-2xl font-bold text-slate-700/85 first-letter:uppercase dark:text-blue-100/95">
                     {category.category}
                   </h3>
                   <div className="space-y-3">
@@ -106,7 +106,7 @@ export default function StackPage() {
             (category) =>
               category.category === "Back-end" && (
                 <div key={category.category} className="flex flex-col gap-4">
-                  <h3 className="text-2xl font-bold text-blue-100/95 first-letter:uppercase">
+                  <h3 className="text-2xl font-bold text-slate-700/85 first-letter:uppercase dark:text-blue-100/95">
                     {category.category}
                   </h3>
                   <div className="space-y-3">
