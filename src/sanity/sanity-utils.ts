@@ -96,6 +96,7 @@ async function getContactData(lang: Lang): Promise<Contact> {
       _id,
       "title": title[$lang],
       "subtitle": subtitle[$lang],
+      "phone": phone[$lang],
       "form": {
         "name": form.name[$lang],
         "email": form.email[$lang],

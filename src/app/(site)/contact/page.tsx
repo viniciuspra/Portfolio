@@ -72,7 +72,7 @@ export default function ContactPage() {
           href="tel:+5548991753796"
           className="flex w-fit gap-3 py-2 font-medium text-primary/80 transition-all hover:text-foreground"
         >
-          <Phone /> Celular
+          <Phone /> {data.phone}
         </Link>
       </DivAnimation>
       <DivAnimation>
