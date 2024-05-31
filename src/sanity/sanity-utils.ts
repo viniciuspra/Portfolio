@@ -3,6 +3,7 @@ import { createClient, groq } from "next-sanity";
 import { Lang } from "@/components/language-selector";
 import clientConfig from "@/sanity/config/client-config";
 import { Contact } from "@/types/contact";
+import { Favorite } from "@/types/favorite";
 import { Home } from "@/types/home";
 import { Page } from "@/types/page";
 import { Project, ProjectPage } from "@/types/project";
@@ -146,6 +147,21 @@ async function getStackData(lang: Lang): Promise<Stack> {
   );
 }
 
+async function getFavoriteData(lang: Lang): Promise<Favorite[]> {
+  return createClient(clientConfig).fetch(
+    groq`*[_type == "favorites"]{
+      _id,
+      title,
+      url,
+      "description": description[$lang],
+      resourceType,
+      "image": image.asset->url,
+      _createdAt
+    }`,
+    { lang },
+  );
+}
+
 async function fetchHomePageData(
   lang: Lang,
 ): Promise<{ homeData: Home; contactData: Contact }> {
@@ -170,6 +186,7 @@ export {
   fetchHomePageData,
   fetchProjectsData,
   getContactData,
+  getFavoriteData,
   getHomeData,
   getPages,
   getProject,

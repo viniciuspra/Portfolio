@@ -17,28 +17,22 @@ const favorites = {
     {
       name: "description",
       title: "Description",
-      type: "object",
-      fields: [
-        {
-          name: "en",
-          title: "en",
-          type: "array",
-          of: [{ type: "block" }],
-        },
-        {
-          name: "pt",
-          title: "pt",
-          type: "array",
-          of: [{ type: "block" }],
-        },
-      ],
+      type: "localeString",
       description: "The Favorite description",
     },
     {
       name: "image",
       title: "Image",
       type: "image",
+      options: {
+        hotspot: true,
+      },
       description: "An image representing the favorite",
+    },
+    {
+      name: "resourceType",
+      title: "Resource Type",
+      type: "string",
     },
   ],
 };
