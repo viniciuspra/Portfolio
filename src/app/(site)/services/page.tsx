@@ -50,7 +50,7 @@ export default function ServicesPage() {
     return <Loading />;
   }
 
-  if (!data) {
+  if (!data || !data?.services) {
     return;
   }
 
@@ -60,17 +60,16 @@ export default function ServicesPage() {
         <PageTitle subtitle={data.description}>{data.title}</PageTitle>
       </div>
       <DivAnimation className="space-y-7 py-10" ChildrenAnimation>
-        {data &&
-          data.services.map((service) => (
-            <React.Fragment key={service._key}>
-              <ServicesCard
-                title={service.title}
-                description={service.description}
-                image={service.image}
-                price={service.price}
-              />
-            </React.Fragment>
-          ))}
+        {data.services.map((service) => (
+          <React.Fragment key={service._key}>
+            <ServicesCard
+              title={service.title}
+              description={service.description}
+              image={service.image}
+              price={service.price}
+            />
+          </React.Fragment>
+        ))}
       </DivAnimation>
     </div>
   );
