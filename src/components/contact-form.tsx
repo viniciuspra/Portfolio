@@ -1,6 +1,6 @@
 "use client";
 import { useForm, ValidationError } from "@formspree/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import { RocketSvgAnimated } from "./rocket-svg-animated";
@@ -18,12 +18,33 @@ interface Props {
 
 export function ContactForm({ form }: Props) {
   const [state, handleSubmit] = useForm("xwkgydle");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((preState) => ({
+      ...preState,
+      [name]: value,
+    }));
+  };
 
   useEffect(() => {
     if (state.succeeded) {
       toast("Thank you for getting in touch! Excited to connect with you.", {
         icon: <RocketSvgAnimated />,
-        className: "dark:bg-card dark:text-white/90",
+        className: "dark:bg-card dark:text-white/90 lg:top-10 top-20",
+      });
+
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
       });
     }
   }, [state.succeeded]);
@@ -43,6 +64,8 @@ export function ContactForm({ form }: Props) {
               id="name"
               type="name"
               name="name"
+              value={formData.name}
+              onChange={handleChange}
               className="w-full rounded-md border bg-background p-2 text-slate-950/90 dark:text-primary/95"
             />
           </label>
@@ -53,6 +76,8 @@ export function ContactForm({ form }: Props) {
               id="email"
               type="email"
               name="email"
+              value={formData.email}
+              onChange={handleChange}
               className="w-full rounded-md border bg-background p-2 text-slate-950/90 dark:text-primary/95"
             />
             <ValidationError
@@ -68,6 +93,8 @@ export function ContactForm({ form }: Props) {
           <textarea
             id="message"
             name="message"
+            value={formData.message}
+            onChange={handleChange}
             className="min-h-40 rounded-md border bg-background px-2 py-3 text-slate-950/90 dark:text-primary/95"
           />
         </label>
