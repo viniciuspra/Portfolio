@@ -8,6 +8,7 @@ import { ServicesCard } from "@/components/services-card";
 import { getServices } from "@/sanity/sanity-utils";
 import { Services } from "@/types/service";
 import { getCurrentLanguage, Lang } from "@/utils/language";
+import Link from "next/link";
 
 export default function ServicesPage() {
   const [data, setData] = useState<Services | null>(null);
@@ -59,16 +60,16 @@ export default function ServicesPage() {
       <div className="w-full space-y-3 p-2">
         <PageTitle subtitle={data.description}>{data.title}</PageTitle>
       </div>
-      <DivAnimation className="space-y-7 py-10" ChildrenAnimation>
+      <DivAnimation className="py-10 flex flex-col gap-7" ChildrenAnimation>
         {data.services.map((service) => (
-          <React.Fragment key={service._key}>
+          <Link href="/contact" key={service._key}>
             <ServicesCard
               title={service.title}
               description={service.description}
               image={service.image}
               price={service.price}
             />
-          </React.Fragment>
+          </Link>
         ))}
       </DivAnimation>
     </div>
