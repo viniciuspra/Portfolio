@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 import { DivAnimation } from "@/components/div-animation";
@@ -8,7 +9,6 @@ import { ServicesCard } from "@/components/services-card";
 import { getServices } from "@/sanity/sanity-utils";
 import { Services } from "@/types/service";
 import { getCurrentLanguage, Lang } from "@/utils/language";
-import Link from "next/link";
 
 export default function ServicesPage() {
   const [data, setData] = useState<Services | null>(null);
