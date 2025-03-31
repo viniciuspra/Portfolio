@@ -28,14 +28,6 @@
 - Tailwind CSS
 - Sanity
 - framer-motion
-
-## Instalação 🛠️
-
-Para executar o projeto em sua própria máquina, siga estas etapas:
-
-    1. Clone o repositório.
-    2. Instale as dependências com `npm install`.
-    3. Inicie o projeto com `npm start`.
     
 ## Licença 📝
 
