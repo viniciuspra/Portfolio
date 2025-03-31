@@ -129,13 +129,13 @@ export function SideBarItems() {
         .filter((item) => item.group === "Socials")
         .map((item) => {
           const IconComponent = iconMap[item.icon];
+          let href = item.slug;
+          item.title === "Read CV"
+            ? (href = "/Curriculum-Vinicius-Cascaes-Prá.pdf")
+            : (href = "/Currículo-Vinicius-Cascaes-Prá.pdf");
           return (
             <li key={item._id} className="group cursor-pointer">
-              <Link
-                href={item.slug}
-                target="_blank"
-                className={sideBarLinkStyle}
-              >
+              <Link href={href} target="_blank" className={sideBarLinkStyle}>
                 <span className={sideBarIconStyle}>
                   <IconComponent />
                 </span>
