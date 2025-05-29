@@ -24,7 +24,7 @@ async function getProjectsPage(lang: Lang): Promise<ProjectPage> {
 
 async function getProjects(lang: Lang): Promise<Project[]> {
   return createClient(clientConfig).fetch(
-    groq`*[_type == "project"]| order(name asc){
+    groq`*[_type == "project"]| order(_createdAt desc){
       _id,
       name,
       "subtitle": subtitle[$lang],
