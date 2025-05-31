@@ -1,4 +1,7 @@
 "use client";
+
+import { useMediaQuery } from "@react-hook/media-query";
+import { motion } from "framer-motion";
 import {
   Bookmark,
   Compass,
@@ -6,21 +9,24 @@ import {
   Github,
   Layers,
   Linkedin,
+  type LucideProps,
   Package,
   Phone,
   Puzzle,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { getPages } from "@/sanity/sanity-utils";
 import { Page } from "@/types/page";
-import { getCurrentLanguage, Lang } from "@/utils/language";
+import { Lang } from "@/utils/language";
 
-import { Loading } from "./loading";
+type SideBarItemsProps = {
+  lang: Lang;
+  pages: Page[];
+};
 
-const iconMap: { [key: string]: React.FC } = {
+const iconMap: { [key: string]: React.FC<LucideProps> } = {
   Bookmark,
   Compass,
   FileText,
@@ -32,118 +38,103 @@ const iconMap: { [key: string]: React.FC } = {
   Puzzle,
 };
 
-export function SideBarItems() {
-  const pathname = usePathname();
-  const [items, setItems] = useState<Page[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const fetchPages = async (language: Lang) => {
-    try {
-      setIsLoading(true);
-      const pages = await getPages(language);
-      setItems(pages);
-    } catch (error) {
-      console.log("Error fetching pages", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchPages(getCurrentLanguage());
-  }, []);
-
-  if (isLoading) {
-    return <Loading />;
+const getIcon = (
+  name: string | undefined,
+): React.ComponentType<LucideProps> | null => {
+  if (!name || !(name in iconMap)) {
+    return null;
   }
+  return iconMap[name];
+};
 
-  const groupItemsByGroup = (
-    items: Page[],
-  ): { [groupName: string]: Page[] } => {
-    const groupedItems: { [groupName: string]: Page[] } = {};
+export function SideBarItems({ lang, pages }: SideBarItemsProps) {
+  const pathname = usePathname();
+  const isMobile = useMediaQuery("(max-width: 1024px)");
 
-    items.forEach((item) => {
-      const groupName = item.group || "Other";
-      if (!groupedItems[groupName]) {
-        groupedItems[groupName] = [];
+  const groupedPages = pages.reduce(
+    (acc, page) => {
+      const group = page.group || (lang === "pt" ? "Outros" : "Other");
+      if (!acc[group]) {
+        acc[group] = [];
       }
-      groupedItems[groupName].push(item);
-    });
-
-    return groupedItems;
-  };
-
-  const groupedItems = groupItemsByGroup(items);
-
-  const sideBarItemStyle =
-    "truncate text-sm tracking-wide group-hover:text-foreground group-hover:font-medium";
-  const sideBarIconStyle =
-    "inline-flex items-center justify-center rounded-lg border p-1 group-hover:bg-blue-500 group-hover:text-white size-7";
-  const sideBarLinkStyle =
-    "group relative flex h-10 flex-row items-center gap-2 rounded-lg px-2 pr-6 transition-all hover:bg-accent group-focus:ring-2";
+      acc[group].push(page);
+      return acc;
+    },
+    {} as Record<string, Page[]>,
+  );
 
   return (
-    <ul className="flex flex-col space-y-2 lg:px-6">
-      {Object.keys(groupedItems).map((groupName) => (
-        <React.Fragment key={groupName}>
-          {groupName !== "Other" && (
-            <li className="pt-4">
-              <div className="flex h-6 flex-row items-center">
-                <div className="text-sm font-light tracking-wide">
-                  {groupName}
-                </div>
-              </div>
-            </li>
-          )}
-          {groupedItems[groupName].map((item) => {
-            const isHome = item.slug === "/";
-            const IconComponent = iconMap[item.icon];
-            const href = isHome ? "/" : `/${item.slug}`;
-            const haveProjectInPath =
-              item.title === "Projects" && pathname.includes("/projects");
-            return (
-              <React.Fragment key={item._id}>
-                {item.group !== "Socials" && (
-                  <li className="group cursor-pointer">
-                    <Link href={href} className={sideBarLinkStyle}>
-                      <span
-                        className={`${pathname === href || haveProjectInPath ? "bg-blue-500 text-white" : "text-foreground/80 dark:text-muted-foreground/80"} ${sideBarIconStyle}`}
-                      >
-                        <IconComponent />
-                      </span>
-                      <span
-                        className={`${pathname === href || haveProjectInPath ? "text-foreground dark:text-white" : "text-muted-foreground/90 dark:text-muted-foreground/80"} ${sideBarItemStyle}`}
-                      >
-                        {item.title}
-                      </span>
-                    </Link>
-                  </li>
-                )}
-              </React.Fragment>
-            );
-          })}
-        </React.Fragment>
-      ))}
+    <nav className="flex flex-col gap-10 px-5 py-10 md:py-2">
+      {Object.entries(groupedPages).map(([group, pagesInGroup]) => (
+        <div key={group} className="flex flex-col gap-3">
+          <h2 className="text-sm font-semibold uppercase text-muted-foreground">
+            {group}
+          </h2>
+          <div className="flex flex-col gap-1">
+            {pagesInGroup.map((page) => {
+              const raw = page.slug ?? "";
+              const slugClean = raw.replace(/^\/+|\/+$/g, "");
+              const slugPath = slugClean ? `/${slugClean}` : "";
+              const href = `/${lang}${slugPath}`;
+              const normalize = (u: string) => u.replace(/\/$/, "");
+              const normalizedPath = normalize(pathname);
+              const normalizedHref = normalize(href);
+              const isActive = normalizedPath === normalizedHref;
+              const IconComponent = getIcon(page.icon);
 
-      {items
-        .filter((item) => item.group === "Socials")
-        .map((item) => {
-          const IconComponent = iconMap[item.icon];
-          let href = item.slug;
-          item.title === "Read CV"
-            ? (href = "/Curriculum-Vinicius-Cascaes-Prá.pdf")
-            : (href = "/Currículo-Vinicius-Cascaes-Prá.pdf");
-          return (
-            <li key={item._id} className="group cursor-pointer">
-              <Link href={href} target="_blank" className={sideBarLinkStyle}>
-                <span className={sideBarIconStyle}>
-                  <IconComponent />
-                </span>
-                <span className={sideBarItemStyle}>{item.title}</span>
-              </Link>
-            </li>
-          );
-        })}
-    </ul>
+              const isSocial = page.group === "Socials";
+
+              let socialHref = raw;
+              if (page.title === "Read CV") {
+                socialHref =
+                  lang === "en"
+                    ? "/Curriculum-Vinicius-Cascaes-Prá.pdf"
+                    : "/Currículo-Vinicius-Cascaes-Prá.pdf";
+              } else if (!/^https?:\/\//.test(raw)) {
+                socialHref = raw.startsWith("/") ? raw : `/${raw}`;
+              }
+
+              const baseClasses =
+                "group relative flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none";
+              const activeClasses = "bg-accent text-accent-foreground";
+              const inactiveClasses =
+                "text-foreground/80 hover:bg-card hover:text-foreground";
+              const sizeClass = isMobile ? "text-lg" : "";
+              const className = `${baseClasses} ${isActive ? activeClasses : inactiveClasses
+                } ${sizeClass}`;
+
+              return isSocial ? (
+                <a
+                  key={page._id}
+                  href={socialHref}
+                  className={className}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="relative z-20 flex items-center gap-3">
+                    {IconComponent && <IconComponent className="h-5 w-5" />}
+                    {page.title}
+                  </span>
+                </a>
+              ) : (
+                <Link key={page._id} href={href} className={className}>
+                  {isActive && (
+                    <motion.div
+                      layoutId="active-pill"
+                      className="absolute inset-0 z-10 rounded-md bg-blue-500 text-primary-foreground"
+                      transition={{ type: "spring", duration: 0.6 }}
+                    />
+                  )}
+                  <span className="relative z-20 flex items-center gap-3">
+                    {IconComponent && <IconComponent className="h-5 w-5" />}
+                    {page.title}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </nav>
   );
 }

@@ -1,12 +1,11 @@
 "use client";
-import { useMediaQuery } from "@react-hook/media-query";
 import { ChevronDown } from "lucide-react";
-import Image, { StaticImageData } from "next/image";
-import { useEffect, useState } from "react";
+import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 
 import br from "@/assets/brazil.svg";
 import usa from "@/assets/usa.svg";
-import { getCurrentLanguage, setLanguage } from "@/utils/language";
 
 export type Lang = "en" | "pt";
 
@@ -23,41 +22,23 @@ const LanguageOptions = [
   },
 ];
 
-export function LanguageSwitcher() {
-  const [_, setLangState] = useState<Lang>("en");
-  const [selectedFlag, setSelectedFlag] = useState(usa);
+type LanguageSwitcherProps = {
+  currentLang: Lang;
+};
+
+export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
+  const router = useRouter();
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isMobile = useMediaQuery("(max-width: 1024px)");
 
-  useEffect(() => {
-    if (typeof window !== "undefined" && window.localStorage) {
-      const savedLang = getCurrentLanguage();
-      const defaultFlag = savedLang === "pt" ? br : usa;
-      setLangState(savedLang);
-      setSelectedFlag(defaultFlag);
+  const selectedFlag = currentLang === "pt" ? br : usa;
 
-      const handleStorageChange = (event: StorageEvent) => {
-        if (event.key === "language") {
-          const newLang = event.newValue as Lang;
-          const newFlag = newLang === "pt" ? br : usa;
-          setLangState(newLang);
-          setSelectedFlag(newFlag);
-        }
-      };
-
-      window.addEventListener("storage", handleStorageChange);
-      return () => {
-        window.removeEventListener("storage", handleStorageChange);
-      };
-    }
-  }, [isMobile]);
-
-  const handleLanguageChange = (languageCode: Lang, flag: StaticImageData) => {
-    setLangState(languageCode);
-    setSelectedFlag(flag);
+  const handleLanguageChange = (newLang: Lang) => {
     setIsMenuOpen(false);
-    setLanguage(languageCode);
-    window.location.reload();
+
+    const newPathname = pathname.replace(`/${currentLang}`, `/${newLang}`);
+
+    router.push(newPathname);
   };
 
   return (
@@ -72,16 +53,14 @@ export function LanguageSwitcher() {
             aria-haspopup="true"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {selectedFlag && (
-              <Image
-                src={selectedFlag}
-                width={28}
-                height={28}
-                alt=""
-                className="h-6 w-6 rounded-full"
-                priority
-              />
-            )}
+            <Image
+              src={selectedFlag}
+              width={28}
+              height={28}
+              alt={currentLang === "pt" ? "Bandeira do Brasil" : "USA Flag"}
+              className="h-6 w-6 rounded-full"
+              priority
+            />
             <ChevronDown className="text-foreground/80" size={20} />
           </button>
         </div>
@@ -96,24 +75,24 @@ export function LanguageSwitcher() {
           >
             <div role="none">
               {LanguageOptions.map((lng) => (
-                <a
+                <div
                   key={lng.value}
                   className="border-b-card-stroke flex cursor-pointer items-center gap-x-2 rounded-md px-3 py-2 text-sm first-of-type:border-b hover:bg-card"
                   role="menuitem"
                   tabIndex={-1}
                   id={`menu-item-${lng.value}`}
-                  onClick={() => handleLanguageChange(lng.value, lng.flag)}
+                  onClick={() => handleLanguageChange(lng.value)}
                 >
                   <Image
                     src={lng.flag}
                     width={24}
                     height={24}
-                    alt=""
+                    alt={lng.name}
                     className="h-6 w-6 rounded-full"
                     priority
                   />
                   {lng.name}
-                </a>
+                </div>
               ))}
             </div>
           </div>

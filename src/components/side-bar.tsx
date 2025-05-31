@@ -5,6 +5,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
+import { Page } from "@/types/page";
+import { Lang } from "@/utils/language";
+
 import { Button } from "./button";
 import { LanguageSwitcher } from "./language-selector";
 import { ModeToggle } from "./mode-toggle";
@@ -12,7 +15,12 @@ import { RocketSvgAnimated } from "./rocket-svg-animated";
 import { SideBarItems } from "./side-bar-items";
 import { SmoothScroll } from "./smooth-scroll";
 
-export function Sidebar() {
+type SidebarProps = {
+  lang: Lang;
+  pages: Page[];
+};
+
+export function Sidebar({ lang, pages }: SidebarProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const [prevPathname, setPrevPathname] = useState(
@@ -29,7 +37,7 @@ export function Sidebar() {
   }, [pathname, prevPathname]);
 
   useEffect(() => {
-    if (open && sidebarRef.current) {
+    if (open && isMobile && sidebarRef.current) {
       const sidebarElement = sidebarRef.current as HTMLElement | null;
       if (sidebarElement) {
         sidebarElement.scrollIntoView({
@@ -38,25 +46,26 @@ export function Sidebar() {
         });
       }
     }
-  }, [open]);
+  }, [open, isMobile]);
+
+  const homeLink = `/${lang}`;
 
   return (
     <>
       <aside
         ref={sidebarRef}
-        className={`left-0 top-0 z-50 flex-col transition-all duration-300 ease-out ${isMobile ? "mb-10 w-full overflow-y-auto border-b bg-background px-5" : "h-full w-64 border-r"} ${isMobile && open ? "absolute h-full transition-all" : "fixed"} `}
+        className={`left-0 top-0 z-50 flex-col bg-background transition-all duration-300 ease-out ${isMobile ? "mb-10 w-full overflow-y-auto border-b" : "fixed h-full w-64 border-r"} ${isMobile && open ? "absolute h-full" : isMobile ? "fixed h-auto" : "fixed"} `}
       >
         <div
-          className={`${isMobile ? "flex w-full items-center justify-between" : ""} ${isMobile && open && "hidden"}`}
+          className={`flex items-center justify-between ${isMobile ? "w-full px-5" : "justify-center md:px-5"} h-28 ${isMobile && open && "hidden"}`}
         >
           <Link
-            href={"/"}
-            className="group flex h-28 items-center justify-center md:px-5 focus:outline-none"
+            href={homeLink}
+            className="group flex items-center focus:outline-none"
           >
             <div className="flex gap-3 group-focus:ring-2 group-focus:ring-foreground">
               <RocketSvgAnimated />
               <h1 className="text-xl font-bold uppercase">
-                {" "}
                 Vinicius{" "}
                 <span className="bg-gradient-to-r from-blue-500 via-purple-700 to-red-500 bg-clip-text font-extrabold text-transparent">
                   Pra
@@ -64,34 +73,36 @@ export function Sidebar() {
               </h1>
             </div>
           </Link>
-          <div className="lg:hidden">
+
+          <div className="flex items-center lg:hidden">
             <ModeToggle />
-            <LanguageSwitcher />
+            <LanguageSwitcher currentLang={lang} />
+            <Button
+              className="z-50 p-2"
+              variant="outline"
+              onClick={() => setOpen(!open)}
+            >
+              <Menu />
+            </Button>
           </div>
-          <Button
-            className="z-50 p-2 lg:hidden"
-            variant="outline"
-            onClick={() => setOpen(!open)}
-          >
-            <Menu />
-          </Button>
         </div>
+
         {!isMobile && (
-          <div className="z-40 flex h-full flex-col overflow-y-auto overflow-x-hidden lg:flex-grow">
-            <SideBarItems />
+          <div className="z-40 flex h-[calc(100%-7rem)] flex-col overflow-y-auto overflow-x-hidden lg:flex-grow">
+            <SideBarItems lang={lang} pages={pages} />
           </div>
         )}
+
         {isMobile && open && (
           <SmoothScroll>
-            <div className="z-50 flex w-full items-center justify-between px-5">
+            <div className="flex h-28 w-full items-center justify-between px-5">
               <Link
-                href={"/"}
-                className="group flex h-28 items-center px-5 focus:outline-none"
+                href={homeLink}
+                className="group flex items-center focus:outline-none"
               >
                 <div className="flex gap-3 group-focus:ring-2 group-focus:ring-foreground">
                   <RocketSvgAnimated />
                   <h1 className="text-xl font-bold uppercase">
-                    {" "}
                     Vinicius{" "}
                     <span className="bg-gradient-to-r from-blue-500 via-purple-700 to-red-500 bg-clip-text font-extrabold text-transparent">
                       Pra
@@ -99,18 +110,20 @@ export function Sidebar() {
                   </h1>
                 </div>
               </Link>
-              <ModeToggle />
-              <LanguageSwitcher />
-              <Button
-                className="z-50 p-2"
-                variant="outline"
-                onClick={() => setOpen(!open)}
-              >
-                <Menu />
-              </Button>
+              <div className="flex items-center">
+                <ModeToggle />
+                <LanguageSwitcher currentLang={lang} />
+                <Button
+                  className="z-50 p-2"
+                  variant="outline"
+                  onClick={() => setOpen(!open)}
+                >
+                  <Menu />
+                </Button>
+              </div>
             </div>
-            <div className="z-40 min-h-screen overflow-y-auto overflow-x-hidden px-7 transition-all lg:flex-grow">
-              <SideBarItems />
+            <div className="z-40 min-h-screen overflow-y-auto overflow-x-hidden px-7 pb-28 transition-all lg:flex-grow">
+              <SideBarItems lang={lang} pages={pages} />
             </div>
           </SmoothScroll>
         )}

@@ -6,12 +6,14 @@ import { PortableText } from "next-sanity";
 import { useEffect, useRef } from "react";
 
 import { Project } from "@/types/project";
+import { Lang } from "@/utils/language";
 
 interface Props {
   projects: Project[];
+  lang: Lang;
 }
 
-export function ProjectCard({ projects }: Props) {
+export function ProjectCard({ projects, lang }: Props) {
   const containerRef = useRef(null);
 
   const isInView = useInView(containerRef, { once: true });
@@ -40,49 +42,53 @@ export function ProjectCard({ projects }: Props) {
       initial="hidden"
       animate={mainControls}
       ref={containerRef}
-      className="h-full w-full space-y-5  py-10 sm:px-10 lg:px-0"
+      className="h-full w-full space-y-5 py-10 sm:px-10 lg:px-0"
     >
-      {projects.map((project) => (
-        <motion.div
-          key={project._id}
-          variants={{
-            hidden: {
-              opacity: 0,
-              translateX: "100%",
-              radius: "12px",
-            },
-            visible: {
-              opacity: 1,
-              translateX: 0,
-              transition: {
-                ease: "easeIn",
-                duration: 0.5,
+      {projects.map((project) => {
+        const projectLink = `/${lang}/projects/${project.slug}`;
+
+        return (
+          <motion.div
+            key={project._id}
+            variants={{
+              hidden: {
+                opacity: 0,
+                translateX: "100%",
+                radius: "12px",
               },
-            },
-          }}
-        >
-          <Link
-            href={`/projects/${project.slug}`}
-            className="group flex w-full flex-col items-center gap-5 rounded-xl border p-4 transition-all duration-500 md:items-start md:border-transparent md:hover:border-foreground lg:flex-row lg:p-2"
+              visible: {
+                opacity: 1,
+                translateX: 0,
+                transition: {
+                  ease: "easeIn",
+                  duration: 0.5,
+                },
+              },
+            }}
           >
-            <div className="lg:w-1/3 lg:min-w-40 lg:px-0">
-              <Image
-                src={project.image}
-                width={1366}
-                height={768}
-                alt={`Representative image of ${project.name} project`}
-                className="aspect-auto rounded-lg transition-all group-hover:brightness-75"
-              />
-            </div>
-            <div className="flex flex-col gap-5 p-5 md:w-[450px] lg:w-[560px] xl:w-[690px]">
-              <h1 className="w-fit text-xl font-bold">{project.name}</h1>
-              <div className="line-clamp-1 text-sm">
-                <PortableText value={project.content} />
+            <Link
+              href={projectLink}
+              className="group flex w-full flex-col items-center gap-5 rounded-xl border p-4 transition-all duration-500 md:items-start md:border-transparent md:hover:border-foreground lg:flex-row lg:p-2"
+            >
+              <div className="lg:w-1/3 lg:min-w-40 lg:px-0">
+                <Image
+                  src={project.image}
+                  width={1366}
+                  height={768}
+                  alt={`Representative image of ${project.name} project`}
+                  className="aspect-auto rounded-lg transition-all group-hover:brightness-75"
+                />
               </div>
-            </div>
-          </Link>
-        </motion.div>
-      ))}
+              <div className="flex flex-col gap-5 p-5 md:w-[450px] lg:w-[560px] xl:w-[690px]">
+                <h1 className="w-fit text-xl font-bold">{project.name}</h1>
+                <div className="line-clamp-1 text-sm">
+                  <PortableText value={project.content} />
+                </div>
+              </div>
+            </Link>
+          </motion.div>
+        );
+      })}
     </motion.div>
   );
 }
