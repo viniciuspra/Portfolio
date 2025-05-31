@@ -42,7 +42,7 @@ export default function ShinyButton({ children, href }: Props) {
         className="relative grid h-12 w-44 place-items-center before:absolute before:h-[calc(100%+6px)] before:w-[calc(100%+6px)] before:animate-rbg-effect before:rounded-lg before:bg-blue-500 lg:w-48"
       >
         <motion.button
-          initial={initialProperties}
+          initial={initialProperties as any}
           animate={animate}
           whileHover={{ scale: 0.98 }}
           transition={{
